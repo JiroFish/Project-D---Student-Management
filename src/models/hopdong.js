@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'HopDong',
+    id: false,
+    defaultScope: {  // Cấu hình mặc định cho mọi truy vấn
+      attributes: { exclude: ['id'] }
+    }
   });
   return HopDong;
 };

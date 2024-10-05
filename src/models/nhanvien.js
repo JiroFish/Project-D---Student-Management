@@ -21,10 +21,15 @@ module.exports = (sequelize, DataTypes) => {
     maPhongBan: DataTypes.STRING,
     tuoi: DataTypes.INTEGER,
     sdt: DataTypes.STRING,
-    id_BangLuong: DataTypes.STRING
+    maBangLuong: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'NhanVien',
+    id: false,
+    defaultScope: {  // Cấu hình mặc định cho mọi truy vấn
+      attributes: { exclude: ['id'] }
+    },
   });
+  NhanVien.removeAttribute('id');
   return NhanVien;
 };

@@ -23,7 +23,7 @@ module.exports = {
       sdt: {
         type: Sequelize.STRING
       },
-      id_BangLuong: {
+      maBangLuong: {
         type: Sequelize.STRING
       },
       createdAt: {

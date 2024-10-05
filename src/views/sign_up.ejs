@@ -12,16 +12,16 @@
 </head>
 
 <body>
-    <form method="post" action="/create_user">
+    <form method="post" action="/nhanvien/create">
         <div class="container">
             <h3>Đăng Nhập</h3>
             <div class="col-md-3 pt-3">
                 <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" name="email" required>
+                <input type="email" class="form-control" id="inputEmail4" name="maNhanVien" required>
             </div>
             <div class="col-md-3">
                 <label for="inputPassword4" class="form-label">Mật Khẩu</label>
-                <input type="password" class="form-control" id="inputPassword4" name="password" required>
+                <input type="password" class="form-control" id="inputPassword4" name="tenNhanVien" required>
             </div>
             <div class="col-12">
                 <div class="form-check">
@@ -47,7 +47,7 @@
             </thead>
             <tbody>
                 <div>
-                    <% listUser.forEach(function(item,index){%>
+                    <% listNhanVien.forEach(function(item,index){%>
                         <div>
                             <tr>
                                 <th class="col-2" scope="row">
@@ -61,7 +61,8 @@
                                 </td>
                                 <td class="col-3">
                                     <button type="submit" class="btn btn-warning">Sửa</button>
-                                    <form method="post" style="display: inline;" action="/delete_user/<%=item.id%>">
+                                    <form method="post" style="display: inline;"
+                                        action="/nhanvien/delete/<%=item.maNhanVien%>">
                                         <button type="submit" class="btn btn-danger">Xóa</button>
                                     </form>
                                 </td>

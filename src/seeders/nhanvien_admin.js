@@ -10,7 +10,7 @@ module.exports = {
       maPhongBan: '',
       tuoi: 18,
       sdt: '',
-      id_BangLuong: ''
+      maBangLuong: ''
     }], {});
 
   },

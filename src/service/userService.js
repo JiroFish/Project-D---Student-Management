@@ -33,32 +33,42 @@ const readUser = async () => {
     // return rows;
 
 
-    // let user = [];
-    // try {
-    //     user = await db.Users.findAll();
-    //     return user;
-    // } catch (err) {
-    //     console.log('>>>>>lỗi', err);
-    // }
-
-
-    let ur = [];
+    let user = [];
     try {
-        ur = await db.NhanVien.findAll({
-            where: { maNhanVien: 'admin' },
-            attributes: ['maNhanVien', 'tenNhanVien'],
-            include: {
-                model: db.HopDong,
-                attributes: ['maHopDong']
-            },
-            raw: true,
-            nest: true
-        })
-        console.log(ur)
-        return ur;
+        user = await db.NhanVien.findAll({
+                    where: { maNhanVien: 'admin' },
+                    attributes: ['maNhanVien', 'tenNhanVien'],
+                    include: {
+                        model: db.HopDong,
+                        attributes: ['maHopDong']
+                    },
+                    raw: true,
+                    nest: true
+                })
+                console.log(user)
+                return user;
     } catch (err) {
-        console.log(">>>>Lỗi: ", err)
+        console.log('>>>>>lỗi', err);
     }
+
+
+    // let ur = [];
+    // try {
+    //     ur = await db.NhanVien.findAll({
+    //         where: { maNhanVien: 'admin' },
+    //         attributes: ['maNhanVien', 'tenNhanVien'],
+    //         include: {
+    //             model: db.HopDong,
+    //             attributes: ['maHopDong']
+    //         },
+    //         raw: true,
+    //         nest: true
+    //     })
+    //     console.log(ur)
+    //     return ur;
+    // } catch (err) {
+    //     console.log(">>>>Lỗi: ", err)
+    // }
 
 }
 

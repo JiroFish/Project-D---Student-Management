@@ -1,6 +1,6 @@
 **CHẠY LỆNH TRONG GITBASH**
 Tạo migrations (đã tạo thì không cần):
-npx sequelize-cli model:generate --name NhanVien --attributes maNhanVien:string,tenNhanVien:string,maChucVu:string,maPhongBan:string,tuoi:INTEGER,sdt:string,id_BangLuong:string
+npx sequelize-cli model:generate --name NhanVien --attributes maNhanVien:string,tenNhanVien:string,maChucVu:string,maPhongBan:string,tuoi:INTEGER,sdt:string,maBangLuong:string
 npx sequelize-cli model:generate --name HopDong --attributes maHopDong:string,maNhanVien:string,ngayBatDau:DATEONLY,ngayKetthuc:DATEONLY
 npx sequelize-cli model:generate --name ChucVu --attributes maChucVu:string,tenChucVu:string,luongCoDinh:INTEGER
 npx sequelize-cli model:generate --name PhongBan --attributes maPhongBan:string,tenPhongBan:string,viTri:string,truongPhong:string

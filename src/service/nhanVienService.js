@@ -2,22 +2,15 @@ import mysql from 'mysql2/promise';
 import Bluebird from 'bluebird';
 import bcrypt from 'bcryptjs';
 import db from '../models/index';
-const salt = bcrypt.genSaltSync(10);
 
-const hashPassword = (userPassword) => {
-    let hash = bcrypt.hashSync(userPassword, salt);
-    return hash;
-}
+// const salt = bcrypt.genSaltSync(10);
+// const hashPassword = (userPassword) => {
+//     let hash = bcrypt.hashSync(userPassword, salt);
+//     return hash;
+// }
 
 const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong) => {
     try {
-        // let hashedPassword = hashPassword(password);
-        // // const [rows, fields] = await conn.execute('insert Users(email,password) values (?,?)', [email, hashedPassword]);
-        // await db.Users.create({
-        //     email: email,
-        //     password: hashedPassword,
-        //     username: 'aa'
-        // })
         await db.NhanVien.create({
             maNhanVien: maNhanVien,
             tenNhanVien: tenNhanVien,
@@ -33,15 +26,6 @@ const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, s
 }
 
 const readNhanVien = async () => {
-    // const conn = await mysql.createConnection({
-    //     host: 'localhost',
-    //     user: 'root',
-    //     database: 'test', Promise: Bluebird
-    // })
-    // const [rows, fields] = await conn.execute("select * from Users");
-    // return rows;
-
-
     let nhanvien = [];
     try {
         nhanvien = await db.NhanVien.findAll({
@@ -54,7 +38,7 @@ const readNhanVien = async () => {
             raw: true,
             // nest: true
         })
-        console.log(nhanvien)
+        // console.log(nhanvien)
         return nhanvien;
     } catch (err) {
         console.log('>>>>>lỗi', err);
@@ -82,7 +66,7 @@ const readNhanVien = async () => {
 }
 
 const updateUser = async (maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong) => {
-    await db.NhanVien.update(
+    const [updatedRows] = await db.NhanVien.update(
         {
             maNhanVien: maNhanVienMoi,
             tenNhanVien: tenNhanVien,
@@ -95,17 +79,18 @@ const updateUser = async (maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, ma
         {
             where: { maNhanVien: maNhanVienCu }
         }
-    )
+    );
+    if (updatedRows === 0) {
+        throw new Error('Không tìm thấy bản ghi nào để cập nhật');
+    }
 };
 
 const deleteUser = async (id) => {
-    try {
-        // const [rows, fields] = await conn.execute("delete from Users where id=?", [id]);
-        // return rows;
-        await db.NhanVien.destroy({
-            where: { maNhanVien: id }
-        })
-    } catch (err) {
+    const deletedRows = await db.NhanVien.destroy({
+        where: { maNhanVien: id }
+    })
+    if (deletedRows === 0) {
+        throw new Error('Không tìm thấy bản ghi nào để xóa');
     }
 }
 module.exports = { createUser, readNhanVien, deleteUser, updateUser }

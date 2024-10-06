@@ -23,7 +23,7 @@ const Handle_NhanVien_Create = (req, res) => {
     return res.redirect("/nhanvien");
 }
 
-const Handle_NhanVien_Update = (req, res) => {
+const Handle_NhanVien_Update = async (req, res) => {
     let maNhanVienCu = req.params.maNhanVienCu;
     let maNhanVienMoi = req.body.maNhanVienMoi;
     let tenNhanVien = req.body.tenNhanVien;
@@ -32,13 +32,23 @@ const Handle_NhanVien_Update = (req, res) => {
     let tuoi = req.body.tuoi;
     let sdt = req.body.sdt;
     let maBangLuong = req.body.maBangLuong;
-    nhanVienService.updateUser(maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong);
-    return res.redirect("/nhanvien");
+    try {
+        await nhanVienService.updateUser(maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong);
+        return res.status(200).json({ message: 'Update thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+    // return res.redirect("/nhanvien");
 }
 
 const Handle_NhanVien_Delete = async (req, res) => {
-    await nhanVienService.deleteUser(req.params.maNhanVien);
-    return res.redirect("/nhanvien");
+
+    try {
+        await nhanVienService.deleteUser(req.params.maNhanVien);
+        return res.status(200).json({ message: 'Delete thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
 }
 module.exports = {
     Handle_Home,

@@ -7,8 +7,8 @@ npx sequelize-cli model:generate --name PhongBan --attributes maPhongBan:string,
 npx sequelize-cli model:generate --name DonNghiPhep --attributes maDon:string,maNhanVien:string,ngayBatDau:DATEONLY,ngayKetthuc:DATEONLY
 
 Chạy migrations (thực thi phần Tạo migrations - Đẩy lên DB):
-npx sequelize-cli db:migrate
-
+npx sequelize-cli db:migrate (tạo mới)
+npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate (Khởi tạo lại)
 //////
 
 Tạo seeder demo (đã tạo thì không cần):

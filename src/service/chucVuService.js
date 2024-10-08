@@ -27,7 +27,7 @@ const readChucVu = async () => {
 }
 
 const updateChucVu = async (maChucVuCu, maChucVuMoi, tenChucVu, luongCoDinh) => {
-    await db.ChucVu.update(
+    const [updatedRows] = await db.ChucVu.update(
         {
             maChucVu: maChucVuMoi,
             tenChucVu: tenChucVu,
@@ -36,15 +36,21 @@ const updateChucVu = async (maChucVuCu, maChucVuMoi, tenChucVu, luongCoDinh) => 
         {
             where: { maChucVu: maChucVuCu }
         }
-    )
+    );
+    if (updatedRows === 0) {
+        throw new Error('Không tìm thấy bản ghi nào để cập nhật');
+    }
 };
 
 const deleteChucVu = async (id) => {
     try {
-        await db.ChucVu.destroy({
+        const deletedRows = await db.ChucVu.destroy({
             where: { maChucVu: id }
         })
     } catch (err) {
+    }
+    if (deletedRows === 0) {
+        throw new Error('Không tìm thấy bản ghi nào để xóa');
     }
 }
 module.exports = { createChucVu, readChucVu, updateChucVu, deleteChucVu }

@@ -28,7 +28,7 @@ const readHopDong = async () => {
 }
 
 const updateHopDong = async (maHopDongCu, maHopDongMoi, maNhanVien, ngayBatDau, ngayKetthuc) => {
-    await db.HopDong.update(
+    const [updatedRows] = await db.HopDong.update(
         {
             maHopDong: maHopDongMoi,
             maNhanVien: maNhanVien,
@@ -38,15 +38,23 @@ const updateHopDong = async (maHopDongCu, maHopDongMoi, maNhanVien, ngayBatDau, 
         {
             where: { maHopDong: maHopDongCu }
         }
-    )
+    );
+    if (updatedRows === 0) {
+        throw new Error('Không tìm thấy bản ghi nào để cập nhật');
+    }
 };
 
 const deleteHopDong = async (id) => {
     try {
-        await db.HopDong.destroy({
+        const deletedRows = await db.HopDong.destroy({
             where: { maHopDong: id }
         })
+        if (deletedRows === 0) {
+            throw new Error('Không tìm thấy bản ghi nào để xóa');
+        }
+
     } catch (err) {
+        throw new Error(err.message);
     }
 }
 module.exports = { createHopDong, readHopDong, updateHopDong, deleteHopDong }

@@ -88,7 +88,7 @@ const updateUser = async (maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, ma
 const deleteUser = async (id) => {
     const deletedRows = await db.NhanVien.destroy({
         where: { maNhanVien: id }
-    })
+    });
     if (deletedRows === 0) {
         throw new Error('Không tìm thấy bản ghi nào để xóa');
     }

@@ -22,6 +22,11 @@ const initWebRoutes = (app) => {
     routes.put("/chucvu/update/:maChucVuCu", HomeController.Handle_ChucVu_Update);
     routes.delete("/chucvu/delete/:maChucVu", HomeController.Handle_ChucVu_Delete);
 
+    routes.get("/phongban", HomeController.Handle_PhongBan);
+    routes.post("/phongban/create", HomeController.Handle_PhongBan_Create);
+    routes.put("/phongban/update/:maPhongBanCu", HomeController.Handle_PhongBan_Update);
+    routes.delete("/phongban/delete/:maPhongBan", HomeController.Handle_PhongBan_Delete);
+
     return app.use("/", routes);
 }
 // module.exports = {

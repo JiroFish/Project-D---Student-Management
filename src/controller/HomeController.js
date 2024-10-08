@@ -1,6 +1,7 @@
 import nhanVienService from "../service/nhanVienService";
 import hopDongService from "../service/hopDongService";
 import chucVuService from "../service/chucVuService";
+import phongBanService from "../service/phongBanService";
 
 const Handle_Home = (req, res) => {
     return res.render("home.ejs");
@@ -134,6 +135,46 @@ const Handle_ChucVu_Delete = async (req, res) => {
     }
 }
 
+const Handle_PhongBan = async (req, res) => {
+    let listPhongBan = await phongBanService.readPhongBan();
+    //sử dụng listChucVu để renderView
+}
+const Handle_PhongBan_Create = async (req, res) => {
+    let maPhongBan = req.body.maPhongBan;
+    let tenPhongBan = req.body.tenPhongBan;
+    let viTri = req.body.viTri;
+    let truongPhong = req.body.truongPhong;
+    try {
+        await phongBanService.createPhongBan(maPhongBan, tenPhongBan, viTri, truongPhong);
+        return res.status(200).json({ message: 'Create Phòng ban thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+const Handle_PhongBan_Update = async (req, res) => {
+    let maPhongBanCu = req.params.maPhongBanCu;
+    let maPhongBanMoi = req.body.maPhongBanMoi;
+    let tenPhongBan = req.body.tenPhongBan;
+    let viTri = req.body.viTri;
+    let truongPhong = req.body.truongPhong;
+    console.log(maPhongBanCu, maPhongBanMoi, tenPhongBan, viTri, truongPhong);
+    try {
+        await phongBanService.updatePhongBan(maPhongBanCu, maPhongBanMoi, tenPhongBan, viTri, truongPhong);
+        return res.status(200).json({ message: 'Update Phòng ban thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+const Handle_PhongBan_Delete = async (req, res) => {
+    let maPhongBan = req.params.maPhongBan;
+    try {
+        await phongBanService.deletePhongBan(maPhongBan);
+        return res.status(200).json({ message: 'Delete Phòng ban thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+
 module.exports = {
     Handle_Home,
     Handle_User,
@@ -151,5 +192,10 @@ module.exports = {
     Handle_ChucVu,
     Handle_ChucVu_Create,
     Handle_ChucVu_Update,
-    Handle_ChucVu_Delete
+    Handle_ChucVu_Delete,
+
+    Handle_PhongBan,
+    Handle_PhongBan_Create,
+    Handle_PhongBan_Update,
+    Handle_PhongBan_Delete
 }

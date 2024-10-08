@@ -28,7 +28,7 @@ const readHopDong = async () => {
 }
 
 const updateHopDong = async (maHopDongCu, maHopDongMoi, maNhanVien, ngayBatDau, ngayKetthuc) => {
-    await db.NhanVien.update(
+    await db.HopDong.update(
         {
             maHopDong: maHopDongMoi,
             maNhanVien: maNhanVien,

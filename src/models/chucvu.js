@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      ChucVu.hasMany(models.NhanVien, { foreignKey: 'maChucVu', targetKey: 'maChucVu' });
+      ChucVu.hasMany(models.NhanVien, { foreignKey: 'maChucVu', sourceKey: 'maChucVu' });
     }
   }
   ChucVu.init({
@@ -25,5 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       attributes: { exclude: ['id'] }
     }
   });
+  ChucVu.removeAttribute('id');
   return ChucVu;
 };

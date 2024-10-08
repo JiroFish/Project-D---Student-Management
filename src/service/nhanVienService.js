@@ -29,16 +29,16 @@ const readNhanVien = async () => {
     let nhanvien = [];
     try {
         nhanvien = await db.NhanVien.findAll({
-            // where: { maNhanVien: 'admin' },
-            // attributes: ['maNhanVien', 'tenNhanVien'],
-            // include: {
-            //     model: db.HopDong,
-            //     attributes: ['maHopDong']
-            // },
+            where: { maNhanVien: 'admin' },
+            attributes: ['maNhanVien', 'tenNhanVien'],
+            include: {
+                model: db.HopDong,
+                attributes: ['maHopDong']
+            },
             raw: true,
-            // nest: true
+            nest: true
         })
-        // console.log(nhanvien)
+        console.log(nhanvien)
         return nhanvien;
     } catch (err) {
         console.log('>>>>>lỗi', err);

@@ -14,8 +14,13 @@ const initWebRoutes = (app) => {
 
     routes.get("/hopdong", HomeController.Handle_HopDong);
     routes.post("/hopdong/create", HomeController.Handle_HopDong_Create);
-    routes.put("/hopdong/update/:maHopDong", HomeController.Handle_HopDong_Update);
+    routes.put("/hopdong/update/:maHopDongCu", HomeController.Handle_HopDong_Update);
     routes.delete("/hopdong/delete/:maHopDong", HomeController.Handle_HopDong_Delete);
+
+    routes.get("/chucvu", HomeController.Handle_ChucVu);
+    routes.post("/chucvu/create", HomeController.Handle_ChucVu_Create);
+    routes.put("/chucvu/update/:maChucVuCu", HomeController.Handle_ChucVu_Update);
+    routes.delete("/chucvu/delete/:maChucVu", HomeController.Handle_ChucVu_Delete);
 
     return app.use("/", routes);
 }

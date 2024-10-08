@@ -27,5 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       attributes: { exclude: ['id'] }
     }
   });
+  HopDong.removeAttribute('id');
   return HopDong;
 };

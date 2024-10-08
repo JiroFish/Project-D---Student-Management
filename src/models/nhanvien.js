@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       NhanVien.hasOne(models.HopDong, { foreignKey: 'maNhanVien', sourceKey: 'maNhanVien' });
-      NhanVien.belongsTo(models.ChucVu, { foreignKey: 'maChucVu', sourceKey: 'maChucVu' });
+      NhanVien.belongsTo(models.ChucVu, { foreignKey: 'maChucVu', targetKey: 'maChucVu' });
     }
   }
   NhanVien.init({

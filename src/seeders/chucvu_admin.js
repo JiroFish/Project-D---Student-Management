@@ -5,9 +5,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('chucvu', [{
       maChucVu: 'cv_admin',
-      maNhanVien: 'admin',
-      ngayBatDau: '2024-10-03',
-      ngayKetThuc: '2025-10-03'
+      tenChucVu: 'admin',
+      luongCoDinh: 2000
     }], {});
 
   },

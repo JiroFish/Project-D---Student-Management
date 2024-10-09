@@ -2,6 +2,7 @@ import nhanVienService from "../service/nhanVienService";
 import hopDongService from "../service/hopDongService";
 import chucVuService from "../service/chucVuService";
 import phongBanService from "../service/phongBanService";
+import donNghiPhepService from "../service/donNghiPhepService"
 
 const Handle_Home = (req, res) => {
     return res.render("home.ejs");
@@ -175,6 +176,45 @@ const Handle_PhongBan_Delete = async (req, res) => {
     }
 }
 
+const Handle_DonNghiPhep = async (req, res) => {
+    let listDonNghiPhep = await donNghiPhepService.readDonNghiPhep();
+    //sử dụng listChucVu để renderView
+}
+const Handle_DonNghiPhep_Create = async (req, res) => {
+    let maDonNghiPhep = req.body.maDonNghiPhep;
+    let maNhanVien = req.body.maNhanVien;
+    let ngayBatDau = req.body.ngayBatDau;
+    let ngayKetThuc = req.body.ngayKetThuc;
+    try {
+        await donNghiPhepService.createDonNghiPhep(maDonNghiPhep, maNhanVien, ngayBatDau, ngayKetThuc);
+        return res.status(200).json({ message: 'Create Đơn nghỉ phép thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+const Handle_DonNghiPhep_Update = async (req, res) => {
+    let maDonNghiPhepCu = req.params.maDonNghiPhepCu;
+    let maDonNghiPhepMoi = req.body.maDonNghiPhepMoi;
+    let maNhanVien = req.body.maNhanVien;
+    let ngayBatDau = req.body.ngayBatDau;
+    let ngayKetThuc = req.body.ngayKetThuc;
+    try {
+        await donNghiPhepService.updateDonNghiPhep(maDonNghiPhepCu, maDonNghiPhepMoi, maNhanVien, ngayBatDau, ngayKetThuc);
+        return res.status(200).json({ message: 'Update Đơn nghỉ phép thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+const Handle_DonNghiPhep_Delete = async (req, res) => {
+    let maDonNghiPhep = req.params.maDonNghiPhep;
+    try {
+        await donNghiPhepService.deleteDonNghiPhep(maDonNghiPhep);
+        return res.status(200).json({ message: 'Delete Đơn nghỉ phép thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+
 module.exports = {
     Handle_Home,
     Handle_User,
@@ -197,5 +237,10 @@ module.exports = {
     Handle_PhongBan,
     Handle_PhongBan_Create,
     Handle_PhongBan_Update,
-    Handle_PhongBan_Delete
+    Handle_PhongBan_Delete,
+
+    Handle_DonNghiPhep,
+    Handle_DonNghiPhep_Create,
+    Handle_DonNghiPhep_Update,
+    Handle_DonNghiPhep_Delete
 }

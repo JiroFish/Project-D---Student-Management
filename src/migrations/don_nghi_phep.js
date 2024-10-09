@@ -2,8 +2,8 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('HopDong', {
-      maHopDong: {
+    await queryInterface.createTable('DonNghiPhep', {
+      maDon: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.STRING
@@ -28,6 +28,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('HopDong');
+    await queryInterface.dropTable('DonNghiPhep');
   }
 };

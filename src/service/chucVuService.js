@@ -47,10 +47,10 @@ const deleteChucVu = async (id) => {
         const deletedRows = await db.ChucVu.destroy({
             where: { maChucVu: id }
         })
+        if (deletedRows === 0) {
+            throw new Error('Không tìm thấy bản ghi nào để xóa');
+        }
     } catch (err) {
-    }
-    if (deletedRows === 0) {
-        throw new Error('Không tìm thấy bản ghi nào để xóa');
     }
 }
 module.exports = { createChucVu, readChucVu, updateChucVu, deleteChucVu }

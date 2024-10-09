@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       NhanVien.hasOne(models.HopDong, { foreignKey: 'maNhanVien', sourceKey: 'maNhanVien' });
       NhanVien.belongsTo(models.ChucVu, { foreignKey: 'maChucVu', targetKey: 'maChucVu' });
       NhanVien.hasOne(models.PhongBan, { foreignKey: 'maPhongBan', sourceKey: 'maPhongBan' });
+      NhanVien.hasMany(models.DonNghiPhep, { foreignKey: 'maNhanVien', sourceKey: 'maNhanVien' });
     }
   }
   NhanVien.init({

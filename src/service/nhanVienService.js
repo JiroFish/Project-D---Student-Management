@@ -9,7 +9,7 @@ import db from '../models/index';
 //     return hash;
 // }
 
-const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong) => {
+const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt) => {
     try {
         await db.NhanVien.create({
             maNhanVien: maNhanVien,
@@ -17,8 +17,7 @@ const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, s
             maChucVu: maChucVu,
             maPhongBan: maPhongBan,
             tuoi: tuoi,
-            sdt: sdt,
-            maBangLuong: maBangLuong
+            sdt: sdt
         })
     } catch (err) {
         console.log(err);
@@ -29,12 +28,29 @@ const readNhanVien = async () => {
     let nhanvien = [];
     try {
         nhanvien = await db.NhanVien.findAll({
-            where: { maNhanVien: 'admin' },
-            attributes: ['maNhanVien', 'tenNhanVien'],
-            include: {
-                model: db.HopDong,
-                attributes: ['maHopDong']
-            },
+            // where: { maNhanVien: 'mnv_1' },
+            // attributes: ['maNhanVien', 'tenNhanVien'],
+
+            // include: {
+            //     model: db.HopDong,
+            //     attributes: ['maHopDong']
+            // },
+            // include: {
+            //     model: db.ChucVu,
+            //     attributes: ['maChucVu']
+            // },
+            // include: {
+            //     model: db.PhongBan,
+            //     attributes: ['maPhongBan']
+            // },
+            // include: {
+            //     model: db.DonNghiPhep,
+            //     attributes: ['maDonNghiPhep']
+            // },
+            // include: {
+            //     model: db.LuongBong,
+            //     attributes: ['maBangLuong']
+            // },
             raw: true,
             nest: true
         })
@@ -65,7 +81,7 @@ const readNhanVien = async () => {
 
 }
 
-const updateUser = async (maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong) => {
+const updateUser = async (maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt) => {
     const [updatedRows] = await db.NhanVien.update(
         {
             maNhanVien: maNhanVienMoi,
@@ -73,8 +89,7 @@ const updateUser = async (maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, ma
             maChucVu: maChucVu,
             maPhongBan: maPhongBan,
             tuoi: tuoi,
-            sdt: sdt,
-            maBangLuong: maBangLuong
+            sdt: sdt
         },
         {
             where: { maNhanVien: maNhanVienCu }

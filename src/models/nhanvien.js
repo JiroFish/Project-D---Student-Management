@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       NhanVien.belongsTo(models.ChucVu, { foreignKey: 'maChucVu', targetKey: 'maChucVu' });
       NhanVien.hasOne(models.PhongBan, { foreignKey: 'maPhongBan', sourceKey: 'maPhongBan' });
       NhanVien.hasMany(models.DonNghiPhep, { foreignKey: 'maNhanVien', sourceKey: 'maNhanVien' });
+      NhanVien.belongsTo(models.LuongBong, { foreignKey: 'maNhanVien', targetKey: 'maNhanVien' });
     }
   }
   NhanVien.init({
@@ -23,8 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     maChucVu: DataTypes.STRING,
     maPhongBan: DataTypes.STRING,
     tuoi: DataTypes.INTEGER,
-    sdt: DataTypes.STRING,
-    maBangLuong: DataTypes.STRING
+    sdt: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'NhanVien',

@@ -3,29 +3,31 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class DonNghiPhep extends Model {
+  class LuongBong extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      DonNghiPhep.hasOne(models.NhanVien, { foreignKey: 'maNhanVien', sourceKey: 'maNhanVien' });
+      LuongBong.hasOne(models.NhanVien, { foreignKey: 'maNhanVien', sourceKey: 'maNhanVien' });
+      LuongBong.belongsTo(models.BangKhauTru, { foreignKey: 'maKhauTru', targetKey: 'maKhauTru' });
     }
   }
-  DonNghiPhep.init({
-    maDonNghiPhep: DataTypes.STRING,
+  LuongBong.init({
+    maBangLuong: DataTypes.STRING,
     maNhanVien: DataTypes.STRING,
-    ngayBatDau: DataTypes.DATEONLY,
-    ngayKetThuc: DataTypes.DATEONLY
+    thang: DataTypes.INTEGER,
+    luongThuong: DataTypes.INTEGER,
+    maKhauTru: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'DonNghiPhep',
+    modelName: 'LuongBong',
     id: false,
     defaultScope: {  // Cấu hình mặc định cho mọi truy vấn
       attributes: { exclude: ['id'] }
-    }
+    },
   });
-  DonNghiPhep.removeAttribute('id');
-  return DonNghiPhep;
+  LuongBong.removeAttribute('id');
+  return LuongBong;
 };

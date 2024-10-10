@@ -1,10 +1,10 @@
 import db from '../models/index';
 
 
-const createBangKhauTru = async (maBangKhauTru, loaiKhauTru, giaTien, moTa) => {
+const createBangKhauTru = async (maKhauTru, loaiKhauTru, giaTien, moTa) => {
     try {
         await db.BangKhauTru.create({
-            maBangKhauTru: maBangKhauTru,
+            maKhauTru: maKhauTru,
             loaiKhauTru: loaiKhauTru,
             giaTien: giaTien,
             moTa: moTa
@@ -27,17 +27,17 @@ const readBangKhauTru = async () => {
     }
 }
 
-const updateBangKhauTru = async (maBangKhauTruCu, maBangKhauTruMoi, loaiKhauTru, giaTien, moTa) => {
-    console.log(maBangKhauTruCu, maBangKhauTruMoi, loaiKhauTru, giaTien, moTa);
+const updateBangKhauTru = async (maKhauTruCu, maKhauTruMoi, loaiKhauTru, giaTien, moTa) => {
+    console.log(maKhauTruCu, maKhauTruMoi, loaiKhauTru, giaTien, moTa);
     const [updatedRows] = await db.BangKhauTru.update(
         {
-            maBangKhauTru: maBangKhauTruMoi,
+            maKhauTru: maKhauTruMoi,
             loaiKhauTru: loaiKhauTru,
             giaTien: giaTien,
             moTa: moTa
         },
         {
-            where: { maBangKhauTru: maBangKhauTruCu }
+            where: { maKhauTru: maKhauTruCu }
         }
     );
     if (updatedRows === 0) {
@@ -47,7 +47,7 @@ const updateBangKhauTru = async (maBangKhauTruCu, maBangKhauTruMoi, loaiKhauTru,
 
 const deleteBangKhauTru = async (id) => {
     const deletedRows = await db.BangKhauTru.destroy({
-        where: { maBangKhauTru: id }
+        where: { maKhauTru: id }
     });
     if (deletedRows === 0) {
         throw new Error('BangKhauTru Không tìm thấy bản ghi nào để xóa');

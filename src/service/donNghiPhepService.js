@@ -4,7 +4,7 @@ import db from '../models/index';
 const createDonNghiPhep = async (maDonNghiPhep, maNhanVien, ngayBatDau, ngayKetThuc) => {
     try {
         await db.DonNghiPhep.create({
-            maDon: maDonNghiPhep,
+            maDonNghiPhep: maDonNghiPhep,
             maNhanVien: maNhanVien,
             ngayBatDau: ngayBatDau,
             ngayKetThuc: ngayKetThuc
@@ -30,13 +30,13 @@ const readDonNghiPhep = async () => {
 const updateDonNghiPhep = async (maDonNghiPhepCu, maDonNghiPhepMoi, maNhanVien, ngayBatDau, ngayKetThuc) => {
     const [updatedRows] = await db.DonNghiPhep.update(
         {
-            maDon: maDonNghiPhepMoi,
+            maDonNghiPhep: maDonNghiPhepMoi,
             maNhanVien: maNhanVien,
             ngayBatDau: ngayBatDau,
             ngayKetThuc: ngayKetThuc
         },
         {
-            where: { maDon: maDonNghiPhepCu }
+            where: { maDonNghiPhep: maDonNghiPhepCu }
         }
     );
     if (updatedRows === 0) {
@@ -47,7 +47,7 @@ const updateDonNghiPhep = async (maDonNghiPhepCu, maDonNghiPhepMoi, maNhanVien, 
 const deleteDonNghiPhep = async (id) => {
     try {
         const deletedRows = await db.DonNghiPhep.destroy({
-            where: { maDon: id }
+            where: { maDonNghiPhep: id }
         })
         if (deletedRows === 0) {
             throw new Error('DonNghiPhep Không tìm thấy bản ghi nào để xóa');

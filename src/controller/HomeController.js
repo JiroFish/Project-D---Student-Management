@@ -2,7 +2,9 @@ import nhanVienService from "../service/nhanVienService";
 import hopDongService from "../service/hopDongService";
 import chucVuService from "../service/chucVuService";
 import phongBanService from "../service/phongBanService";
-import donNghiPhepService from "../service/donNghiPhepService"
+import donNghiPhepService from "../service/donNghiPhepService";
+import luongBongService from "../service/luongBongService";
+import bangKhauTruService from "../service/bangKhauTruService";
 
 const Handle_Home = (req, res) => {
     return res.render("home.ejs");
@@ -215,6 +217,88 @@ const Handle_DonNghiPhep_Delete = async (req, res) => {
     }
 }
 
+const Handle_LuongBong = async (req, res) => {
+    let listLuongBong = await luongBongService.readLuongBong();
+    //sử dụng listLuongBong để renderView
+}
+const Handle_LuongBong_Create = async (req, res) => {
+    let maBangLuong = req.body.maBangLuong;
+    let maNhanVien = req.body.maNhanVien;
+    let thang = req.body.thang;
+    let luongThuong = req.body.luongThuong;
+    let maKhauTru = req.body.maKhauTru;
+    try {
+        await luongBongService.createLuongBong(maBangLuong, maNhanVien, thang, luongThuong, maKhauTru);
+        return res.status(200).json({ message: 'Create Lương Bổng thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+const Handle_LuongBong_Update = async (req, res) => {
+    let maBangLuongCu = req.params.maBangLuongCu;
+    let maBangLuongMoi = req.body.maBangLuongMoi;
+    let maNhanVien = req.body.maNhanVien;
+    let thang = req.body.thang;
+    let luongThuong = req.body.luongThuong;
+    let maKhauTru = req.body.maKhauTru;
+    console.log(maBangLuongCu, maBangLuongMoi, maNhanVien, thang, luongThuong);
+    try {
+        await luongBongService.updateLuongBong(maBangLuongCu, maBangLuongMoi, maNhanVien, thang, luongThuong, maKhauTru);
+        return res.status(200).json({ message: 'Update Lương Bổng thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+const Handle_LuongBong_Delete = async (req, res) => {
+    let maBangLuong = req.params.maBangLuong;
+    try {
+        await luongBongService.deleteLuongBong(maBangLuong);
+        return res.status(200).json({ message: 'Delete Lương Bổng thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+
+const Handle_BangKhauTru = async (req, res) => {
+    let listBangKhauTru = await bangKhauTruService.readBangKhauTru();
+    //sử dụng listChucVu để renderView
+}
+const Handle_BangKhauTru_Create = async (req, res) => {
+    let maKhauTru = req.body.maKhauTru;
+    let loaiKhauTru = req.body.loaiKhauTru;
+    let giaTien = req.body.giaTien;
+    let moTa = req.body.moTa;
+    try {
+        await bangKhauTruService.createBangKhauTru(maKhauTru, loaiKhauTru, giaTien, moTa);
+        return res.status(200).json({ message: 'Create Bảng Khấu Trừ thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+const Handle_BangKhauTru_Update = async (req, res) => {
+    let maKhauTruCu = req.params.maKhauTruCu;
+    let maKhauTruMoi = req.body.maKhauTruMoi;
+    let loaiKhauTru = req.body.loaiKhauTru;
+    let giaTien = req.body.giaTien;
+    let moTa = req.body.moTa;
+    console.log(maKhauTruCu, maKhauTruMoi, loaiKhauTru, giaTien, moTa);
+    try {
+        await bangKhauTruService.updateBangKhauTru(maKhauTruCu, maKhauTruMoi, loaiKhauTru, giaTien, moTa);
+        return res.status(200).json({ message: 'Update Bảng Khấu Trừ thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+const Handle_BangKhauTru_Delete = async (req, res) => {
+    let maKhauTru = req.params.maKhauTru;
+    try {
+        await bangKhauTruService.deleteBangKhauTru(maKhauTru);
+        return res.status(200).json({ message: 'Delete Bảng Khấu Trừ thành công' });
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+
 module.exports = {
     Handle_Home,
     Handle_User,
@@ -242,5 +326,15 @@ module.exports = {
     Handle_DonNghiPhep,
     Handle_DonNghiPhep_Create,
     Handle_DonNghiPhep_Update,
-    Handle_DonNghiPhep_Delete
+    Handle_DonNghiPhep_Delete,
+
+    Handle_LuongBong,
+    Handle_LuongBong_Create,
+    Handle_LuongBong_Update,
+    Handle_LuongBong_Delete,
+
+    Handle_BangKhauTru,
+    Handle_BangKhauTru_Create,
+    Handle_BangKhauTru_Update,
+    Handle_BangKhauTru_Delete
 }

@@ -1,0 +1,26 @@
+<title>Danh sách hồ sơ hợp đồng</title>
+<link rel="stylesheet" href="css/timkiem.css">
+<link rel="icon" type="icon" href="icon/logo.png">
+<%- include('sliderbar.ejs') %>
+
+    <body>
+        <div class="sinhvien">
+            <h1>Quản Lý Hợp Đồng</h1>
+            <form method="GET" action="">
+                <input class="tk" type="submit" value="Tìm kiếm">
+                <input class="Timkiem" type="text" name="search" value=""
+                    placeholder="Nhập mã nhân viên hoặc mã hợp đồng">
+            </form>
+            <a href="Themhopdong.ejs">Thêm hợp đồng</a>
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Mã hợp đồng</th>
+                    <th>Mã nhân viên</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Thao tác</th>
+                </tr>
+            </table>
+        </div>
+    </body>

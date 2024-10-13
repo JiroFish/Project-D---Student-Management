@@ -11,6 +11,8 @@ const PORT = process.env.PORT || 8000;
 //config bodyParser rút gọn thông báo request
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('src/views'));
+
 
 //KHởi động viewEngine biên dịch code import - require
 viewEngine.configViewEngine(app);

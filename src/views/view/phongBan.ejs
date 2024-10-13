@@ -1,0 +1,24 @@
+<title>Danh sách phòng ban</title>
+<link rel="stylesheet" href="css/timkiem.css">
+<link rel="icon" type="icon" href="icon/logo.png">
+<%- include('sliderbar.ejs') %>
+
+    <body>
+        <div class="sinhvien">
+            <h1>Quản Lý Phòng Ban</h1>
+            <form method="GET" action="">
+                <input class="tk" type="submit" value="Tìm kiếm">
+                <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập tên hoặc mã phòng ban">
+            </form>
+            <a href="Themphong.ejs">Thêm phòng ban</a>
+            <table border="1">
+                <tr>
+                    <th>Mã phòng ban</th>
+                    <th>Tên phòng ban</th>
+                    <th>Vị trí</th>
+                    <th>Trưởng phòng</th>
+                    <th>Thao tác</th>
+                </tr>
+            </table>
+        </div>
+    </body>

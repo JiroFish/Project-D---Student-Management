@@ -1,0 +1,22 @@
+<title>Danh sách bảng khấu trừ</title>
+<link rel="stylesheet" href="css/timkiem.css">
+<link rel="icon" type="icon" href="icon/logo.png">
+<%- include('sliderbar.ejs') %>
+
+    <body>
+        <div class="sinhvien">
+            <h1>Quản Lý Giáo Viên</h1>
+            <form method="GET" action="">
+                <input class="tk" type="submit" value="Tìm kiếm">
+                <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập mã hoặc tên giáo viên">
+            </form>
+            <a href="Themluong.ejs">Thêm dữ liệu</a>
+            <table border="1">
+                <tr>
+                    <th>Mã giáo viên</th>
+                    <th>Tên giáo viên</th>
+                    <th>Thao tác</th>
+                </tr>
+            </table>
+        </div>
+    </body>

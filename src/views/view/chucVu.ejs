@@ -1,0 +1,24 @@
+<title>Danh sách chức vụ</title>
+<link rel="stylesheet" href="css/timkiem.css">
+<link rel="icon" type="icon" href="icon/logo.png">
+<%- include('sliderbar.ejs') %>
+
+
+    <body>
+        <div class="sinhvien">
+            <h1>Quản Lý Chức Vụ</h1>
+            <form method="post" action="/chucvu">
+                <input class="tk" type="submit" value="Tìm kiếm">
+                <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập tên phòng hoặc mã chức vụ">
+            </form>
+            <a href="Themthanhtoan.ejs">Thêm chức vụ</a>
+            <table border="1">
+                <tr>
+                    <th>Mã chức vụ</th>
+                    <th>Tên chức vụ</th>
+                    <th>Lương cố định</th>
+                    <th>Thao tác</th>
+                </tr>
+            </table>
+        </div>
+    </body>

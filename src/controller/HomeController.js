@@ -7,15 +7,16 @@ import luongBongService from "../service/luongBongService";
 import bangKhauTruService from "../service/bangKhauTruService";
 
 const Handle_Home = (req, res) => {
-    return res.render("home.ejs");
+    return res.render("chucVu.ejs");
 }
 const Handle_User = (req, res) => {
-    return res.render("user.ejs");
+    return res.render("Chucvu.ejs");
 }
 
 const Handle_Nhan_Vien = async (req, res) => {
     let listNhanVien = await nhanVienService.readNhanVien();
-    return res.render("sign_up.ejs", { listNhanVien });
+    // return res.render("sign_up.ejs", { listNhanVien });
+    return res.render("nhanVien.ejs", { listNhanVien });
 }
 const Handle_NhanVien_Create = async (req, res) => {
     let maNhanVien = req.body.maNhanVien;
@@ -63,6 +64,7 @@ const Handle_NhanVien_Delete = async (req, res) => {
 
 const Handle_HopDong = async (req, res) => {
     let listNhanVien = await hopDongService.readHopDong();
+    return res.render("hopDong.ejs");
     //sử dụng listNhanVien để renderView
 
 }
@@ -103,6 +105,7 @@ const Handle_HopDong_Delete = async (req, res) => {
 
 const Handle_ChucVu = async (req, res) => {
     let listChucVu = await chucVuService.readChucVu();
+    return res.render("chucVu.ejs");
     //sử dụng listChucVu để renderView
 }
 const Handle_ChucVu_Create = async (req, res) => {
@@ -140,6 +143,7 @@ const Handle_ChucVu_Delete = async (req, res) => {
 
 const Handle_PhongBan = async (req, res) => {
     let listPhongBan = await phongBanService.readPhongBan();
+    return res.render("phongBan.ejs");
     //sử dụng listChucVu để renderView
 }
 const Handle_PhongBan_Create = async (req, res) => {
@@ -180,6 +184,7 @@ const Handle_PhongBan_Delete = async (req, res) => {
 
 const Handle_DonNghiPhep = async (req, res) => {
     let listDonNghiPhep = await donNghiPhepService.readDonNghiPhep();
+    return res.render("donNghiPhep.ejs");
     //sử dụng listChucVu để renderView
 }
 const Handle_DonNghiPhep_Create = async (req, res) => {
@@ -219,6 +224,7 @@ const Handle_DonNghiPhep_Delete = async (req, res) => {
 
 const Handle_LuongBong = async (req, res) => {
     let listLuongBong = await luongBongService.readLuongBong();
+    return res.render("luongBong.ejs");
     //sử dụng listLuongBong để renderView
 }
 const Handle_LuongBong_Create = async (req, res) => {
@@ -261,6 +267,7 @@ const Handle_LuongBong_Delete = async (req, res) => {
 
 const Handle_BangKhauTru = async (req, res) => {
     let listBangKhauTru = await bangKhauTruService.readBangKhauTru();
+    return res.render("khauTru.ejs");
     //sử dụng listChucVu để renderView
 }
 const Handle_BangKhauTru_Create = async (req, res) => {

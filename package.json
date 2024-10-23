@@ -18,7 +18,8 @@
     "express": "^4.17.2",
     "mysql2": "^3.11.0",
     "nodemon": "^2.0.15",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "axios": "^1.7.7"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

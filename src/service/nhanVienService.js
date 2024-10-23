@@ -108,4 +108,19 @@ const deleteUser = async (id) => {
         throw new Error('Không tìm thấy bản ghi nào để xóa');
     }
 }
-module.exports = { createUser, readNhanVien, deleteUser, updateUser }
+
+const getGiaoVien = async () => {
+    let getGV = await db.NhanVien.findAll(
+        {
+            where: {
+                maChucVu: 'GV'
+            },
+            raw: true,
+            nest: true
+        }
+
+    )
+    return getGV;
+}
+
+module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien }

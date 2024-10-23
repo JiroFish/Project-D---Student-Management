@@ -10,7 +10,7 @@ const initWebRoutes = (app) => {
     routes.get("/nhanvien", HomeController.Handle_Nhan_Vien);
     routes.post("/nhanvien/create", HomeController.Handle_NhanVien_Create);
     routes.put("/nhanvien/update/:maNhanVienCu", HomeController.Handle_NhanVien_Update);
-    routes.delete("/nhanvien/delete/:maNhanVien", HomeController.Handle_NhanVien_Delete);
+    routes.post("/nhanvien/delete/:maNhanVien", HomeController.Handle_NhanVien_Delete);
 
     routes.get("/hopdong", HomeController.Handle_HopDong);
     routes.post("/hopdong/create", HomeController.Handle_HopDong_Create);
@@ -41,6 +41,9 @@ const initWebRoutes = (app) => {
     routes.post("/bangkhautru/create", HomeController.Handle_BangKhauTru_Create);
     routes.put("/bangkhautru/update/:maKhauTruCu", HomeController.Handle_BangKhauTru_Update);
     routes.delete("/bangkhautru/delete/:maKhauTru", HomeController.Handle_BangKhauTru_Delete);
+
+    routes.get("/chucvugiaovien", HomeController.Handle_LayChucVuGiaoVien);
+
 
     return app.use("/", routes);
 }

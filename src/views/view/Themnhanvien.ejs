@@ -1,0 +1,38 @@
+<title>Thêm nhân viên</title>
+<link rel="stylesheet" href="css/themhopdong.css">
+<link rel="icon" type="icon" href="icon/logo.png">
+<%- include('sliderbar.ejs') %>
+
+    <body>
+        <div class="themsinhvien">
+            <div>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <label for="Manhanvien">Mã nhân viên</label>
+                        <input type="text" name="Manhanvien" id="manhanvien" placeholder="VD: NV1">
+                    </div>
+                    <div class="form-group">
+                        <label for="Tennhanvien">Tên nhân viên</label>
+                        <input type="text" name="Tensinhvien" id="tensinhvien" placeholder="VD: Nguyễn Thành Hưng">
+                    </div>
+                    <div class="form-group">
+                        <label for="Machucvu">Mã chức vụ</label>
+                        <input type="text" name="Machucvu" id="machucvu" placeholder="VD: CV1">
+                    </div>
+                    <div class="form-group">
+                        <label for="Maphongban">Mã phòng ban</label>
+                        <input type="text" name="Maphongban" id="maphongban" placeholder="VD: PB1">
+                    </div>
+                    <div class="form-group">
+                        <label for="Tuoi">Tuổi</label>
+                        <input type="text" name="Tuoi" id="tuoi" placeholder="VD: 19">
+                    </div>
+                    <div class="form-group">
+                        <label for="Sodienthoai">Số điện thoại</label>
+                        <input type="text" name="Sodienthoai" id="sodienthoai" placeholder="VD: 0925875289">
+                    </div>
+                    <input type="submit" name="thd" value="Thêm nhân viên">
+                </form>
+            </div>
+        </div>
+    </body>

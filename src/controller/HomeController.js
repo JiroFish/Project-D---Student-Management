@@ -10,7 +10,7 @@ const Handle_Home = (req, res) => {
     return res.render("dashBoard.ejs");
 }
 const Handle_User = (req, res) => {
-    return res.render("Chucvu.ejs");
+    return res.render("Themnhanvien.ejs");
 }
 
 const Handle_Nhan_Vien = async (req, res) => {
@@ -28,7 +28,8 @@ const Handle_NhanVien_Create = async (req, res) => {
     let maBangLuong = req.body.maBangLuong;
     try {
         await nhanVienService.createUser(maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong);
-        return res.status(200).json({ message: 'Create Nhân viên thành công' });
+        return res.redirect("/nhanvien");
+        // return res.status(200).json({ message: 'Create Nhân viên thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
@@ -46,17 +47,18 @@ const Handle_NhanVien_Update = async (req, res) => {
     let maBangLuong = req.body.maBangLuong;
     try {
         await nhanVienService.updateUser(maNhanVienCu, maNhanVienMoi, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong);
-        return res.status(200).json({ message: 'Update thành công' });
+        return res.redirect("/nhanvien");
+        // return res.status(200).json({ message: 'Update thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
-    // return res.redirect("/nhanvien");
 }
 const Handle_NhanVien_Delete = async (req, res) => {
 
     try {
         await nhanVienService.deleteUser(req.params.maNhanVien);
-        return res.status(200).json({ message: 'Delete thành công' });
+        return res.redirect("/nhanvien");
+        // return res.status(200).json({ message: 'Delete thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
@@ -75,6 +77,7 @@ const Handle_HopDong_Create = async (req, res) => {
     let ngayKetthuc = req.body.ngayKetthuc;
     try {
         await hopDongService.createHopDong(maHopDong, maNhanVien, ngayBatDau, ngayKetthuc);
+        return res.redirect("/hopdong");
         return res.status(200).json({ message: 'Create hợp đồng thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -88,7 +91,8 @@ const Handle_HopDong_Update = async (req, res) => {
     let ngayKetthuc = req.body.ngayKetthuc;
     try {
         await hopDongService.updateHopDong(maHopDongCu, maHopDongMoi, maNhanVien, ngayBatDau, ngayKetthuc);
-        return res.status(200).json({ message: 'Update hợp đồng thành công' });
+        return res.redirect("/hopdong");
+        // return res.status(200).json({ message: 'Update hợp đồng thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
@@ -97,7 +101,8 @@ const Handle_HopDong_Delete = async (req, res) => {
     let maHopDong = req.params.maHopDong;
     try {
         await hopDongService.deleteHopDong(maHopDong);
-        return res.status(200).json({ message: 'Delete hợp đồng thành công' });
+        return res.redirect("/hopdong");
+        // return res.status(200).json({ message: 'Delete hợp đồng thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
@@ -114,7 +119,8 @@ const Handle_ChucVu_Create = async (req, res) => {
     let luongCoDinh = req.body.luongCoDinh;
     try {
         await chucVuService.createChucVu(maChucVu, tenChucVu, luongCoDinh);
-        return res.status(200).json({ message: 'Create Chức vụ thành công' });
+        return res.redirect("/chucvu");
+        // return res.status(200).json({ message: 'Create Chức vụ thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
@@ -126,7 +132,8 @@ const Handle_ChucVu_Update = async (req, res) => {
     let luongCoDinh = req.body.luongCoDinh;
     try {
         await chucVuService.updateChucVu(maChucVuCu, maChucVuMoi, tenChucVu, luongCoDinh);
-        return res.status(200).json({ message: 'Update Chức vụ thành công' });
+        return res.redirect("/chucvu");
+        // return res.status(200).json({ message: 'Update Chức vụ thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
@@ -135,7 +142,8 @@ const Handle_ChucVu_Delete = async (req, res) => {
     let maChucVu = req.params.maChucVu;
     try {
         await chucVuService.deleteChucVu(maChucVu);
-        return res.status(200).json({ message: 'Delete Chức vụ thành công' });
+        return res.redirect("/chucvu");
+        // return res.status(200).json({ message: 'Delete Chức vụ thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
@@ -305,6 +313,12 @@ const Handle_BangKhauTru_Delete = async (req, res) => {
         return res.status(400).json({ message: err.message });
     }
 }
+const Handle_LayChucVuGiaoVien = async (req, res) => {
+    let GV = await nhanVienService.getGiaoVien();
+    console.log(GV);
+    return res.json(GV);
+    // res.json({ message: "Lấy API thành công" });
+}
 
 module.exports = {
     Handle_Home,
@@ -343,5 +357,7 @@ module.exports = {
     Handle_BangKhauTru,
     Handle_BangKhauTru_Create,
     Handle_BangKhauTru_Update,
-    Handle_BangKhauTru_Delete
+    Handle_BangKhauTru_Delete,
+
+    Handle_LayChucVuGiaoVien
 }

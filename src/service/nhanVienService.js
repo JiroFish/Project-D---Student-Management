@@ -109,12 +109,25 @@ const deleteUser = async (id) => {
     }
 }
 
+const findByIdNhanVien = async (maNhanVienCu) => {
+    try {
+        nv1 = await db.NhanVien.findOne({
+            where: { maNhanVien: maNhanVienCu },
+            raw: true
+        })
+        return nv1;
+    } catch (error) {
+        throw new Error(error.messeage);
+    }
+}
+
 const getGiaoVien = async () => {
     let getGV = await db.NhanVien.findAll(
         {
             where: {
                 maChucVu: 'GV'
             },
+            attributes: ['maNhanVien', 'tenNhanVien'],
             raw: true,
             nest: true
         }
@@ -123,4 +136,4 @@ const getGiaoVien = async () => {
     return getGV;
 }
 
-module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien }
+module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien, findByIdNhanVien }

@@ -1,13 +1,13 @@
 import db from '../models/index';
 
 
-const createHopDong = async (maHopDong, maNhanVien, ngayBatDau, ngayKetthuc) => {
+const createHopDong = async (maHopDong, maNhanVien, ngayBatDau, ngayKetThuc) => {
     try {
         await db.HopDong.create({
             maHopDong: maHopDong,
             maNhanVien: maNhanVien,
             ngayBatDau: ngayBatDau,
-            ngayKetthuc: ngayKetthuc
+            ngayKetThuc: ngayKetThuc
         })
     } catch (err) {
         console.log(err);

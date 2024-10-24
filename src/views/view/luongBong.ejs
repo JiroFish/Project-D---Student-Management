@@ -20,13 +20,60 @@
         }
     </style>
     <div class="sinhvien">
-        <h1>Quản Lý Lương</h1>
+        <h1>Quản Lý Lương Bổng</h1>
         <form method="GET" action="">
             <input class="tk" type="submit" value="Tìm kiếm">
             <input class="Timkiem" type="text" name="search" value=""
                 placeholder="Nhập mã bảng lương hoặc tên nhân viên">
         </form>
-        <a href="Themluong.ejs">Thêm dữ liệu</a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Thêm lương bổng
+        </button>
+
+        <!-- Modal -->
+        <form method="post" action="/luongbong/create">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm lương bổng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label for="maBangLuong" class="form-label">Mã bảng lương</label>
+                                <input class="form-control" id="maBangLuong" aria-describedby="emailHelp"
+                                    name="maBangLuong" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="maNhanVien" class="form-label">Mã nhân viên</label>
+                                <input type="text" class="form-control" id="maNhanVien" name="maNhanVien" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="thang" class="form-label">Tháng</label>
+                                <input type="number" class="form-control" id="thang" name="thang" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="luongThuong" class="form-label">Lương thưởng</label>
+                                <input type="number" class="form-control" id="luongThuong" name="luongThuong" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="maKhauTru" class="form-label">Mã Khấu trừ</label>
+                                <input type="text" class="form-control" id="maKhauTru" name="maKhauTru" required>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         <table border="1">
             <thead>
                 <tr>
@@ -61,7 +108,7 @@
                                 <td>
                                     <button type="submit" class="btn btn-warning">Sửa</button>
                                     <form method="post" style="display: inline;"
-                                        action="/nhanvien/delete/<%=item.maNhanVien%>">
+                                        action="/luongbong/delete/<%=item.maBangLuong%>">
                                         <button type="submit" class="btn btn-danger">Xóa</button>
                                     </form>
                                 </td>

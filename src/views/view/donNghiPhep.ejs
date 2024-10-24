@@ -25,7 +25,49 @@
             <input class="tk" type="submit" value="Tìm kiếm">
             <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập mã đơn hoặc mã nhân viên">
         </form>
-        <a href="Themdonnghiphep.ejs">Thêm dơn nghỉ phép</a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Thêm đơn nghỉ phép
+        </button>
+
+        <!-- Modal -->
+        <form method="post" action="/donnghiphep/create">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm đơn nghỉ phép</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label for="maDonNghiPhep" class="form-label">Mã đơn nghỉ phép</label>
+                                <input class="form-control" id="maDonNghiPhep" aria-describedby="emailHelp"
+                                    name="maDonNghiPhep" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="maNhanVien" class="form-label">Mã nhân viên</label>
+                                <input type="text" class="form-control" id="maNhanVien" name="maNhanVien" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ngayBatDau" class="form-label">Ngày bắt đầu</label>
+                                <input type="date" class="form-control" id="ngayBatDau" name="ngayBatDau" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ngayKetThuc" class="form-label">Ngày kết thúc</label>
+                                <input type="date" class="form-control" id="ngayKetThuc" name="ngayKetThuc" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         <table border="1">
             <thead>
                 <tr>
@@ -56,7 +98,7 @@
                                 <td>
                                     <button type="submit" class="btn btn-warning">Sửa</button>
                                     <form method="post" style="display: inline;"
-                                        action="/nhanvien/delete/<%=item.maNhanVien%>">
+                                        action="/donnghiphep/delete/<%=item.maDonNghiPhep%>">
                                         <button type="submit" class="btn btn-danger">Xóa</button>
                                     </form>
                                 </td>

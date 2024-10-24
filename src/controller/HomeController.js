@@ -36,6 +36,12 @@ const Handle_NhanVien_Create = async (req, res) => {
     // return res.redirect("/nhanvien");
 }
 
+const Handle_Find_Update = async (req, res) => {
+    let maNhanVienCu = req.params.maNhanVien;
+    let findnv = await nhanVienService.findByIdNhanVien(maNhanVienCu);
+    console.log("check findnv", findnv);
+}
+
 const Handle_NhanVien_Update = async (req, res) => {
     let maNhanVienCu = req.params.maNhanVienCu;
     let maNhanVienMoi = req.body.maNhanVienMoi;
@@ -74,9 +80,9 @@ const Handle_HopDong_Create = async (req, res) => {
     let maHopDong = req.body.maHopDong;
     let maNhanVien = req.body.maNhanVien;
     let ngayBatDau = req.body.ngayBatDau;
-    let ngayKetthuc = req.body.ngayKetthuc;
+    let ngayKetThuc = req.body.ngayKetThuc;
     try {
-        await hopDongService.createHopDong(maHopDong, maNhanVien, ngayBatDau, ngayKetthuc);
+        await hopDongService.createHopDong(maHopDong, maNhanVien, ngayBatDau, ngayKetThuc);
         return res.redirect("/hopdong");
         return res.status(200).json({ message: 'Create hợp đồng thành công' });
     } catch (err) {
@@ -161,6 +167,7 @@ const Handle_PhongBan_Create = async (req, res) => {
     let truongPhong = req.body.truongPhong;
     try {
         await phongBanService.createPhongBan(maPhongBan, tenPhongBan, viTri, truongPhong);
+        return res.redirect("/phongban");
         return res.status(200).json({ message: 'Create Phòng ban thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -175,6 +182,7 @@ const Handle_PhongBan_Update = async (req, res) => {
     console.log(maPhongBanCu, maPhongBanMoi, tenPhongBan, viTri, truongPhong);
     try {
         await phongBanService.updatePhongBan(maPhongBanCu, maPhongBanMoi, tenPhongBan, viTri, truongPhong);
+        return res.redirect("/phongban");
         return res.status(200).json({ message: 'Update Phòng ban thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -184,6 +192,7 @@ const Handle_PhongBan_Delete = async (req, res) => {
     let maPhongBan = req.params.maPhongBan;
     try {
         await phongBanService.deletePhongBan(maPhongBan);
+        return res.redirect("/phongban");
         return res.status(200).json({ message: 'Delete Phòng ban thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -202,6 +211,7 @@ const Handle_DonNghiPhep_Create = async (req, res) => {
     let ngayKetThuc = req.body.ngayKetThuc;
     try {
         await donNghiPhepService.createDonNghiPhep(maDonNghiPhep, maNhanVien, ngayBatDau, ngayKetThuc);
+        return res.redirect("/donnghiphep");
         return res.status(200).json({ message: 'Create Đơn nghỉ phép thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -215,6 +225,7 @@ const Handle_DonNghiPhep_Update = async (req, res) => {
     let ngayKetThuc = req.body.ngayKetThuc;
     try {
         await donNghiPhepService.updateDonNghiPhep(maDonNghiPhepCu, maDonNghiPhepMoi, maNhanVien, ngayBatDau, ngayKetThuc);
+        return res.redirect("/donnghiphep");
         return res.status(200).json({ message: 'Update Đơn nghỉ phép thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -224,6 +235,7 @@ const Handle_DonNghiPhep_Delete = async (req, res) => {
     let maDonNghiPhep = req.params.maDonNghiPhep;
     try {
         await donNghiPhepService.deleteDonNghiPhep(maDonNghiPhep);
+        return res.redirect("/donnghiphep");
         return res.status(200).json({ message: 'Delete Đơn nghỉ phép thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -243,6 +255,7 @@ const Handle_LuongBong_Create = async (req, res) => {
     let maKhauTru = req.body.maKhauTru;
     try {
         await luongBongService.createLuongBong(maBangLuong, maNhanVien, thang, luongThuong, maKhauTru);
+        return res.redirect("/luongbong");
         return res.status(200).json({ message: 'Create Lương Bổng thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -258,6 +271,7 @@ const Handle_LuongBong_Update = async (req, res) => {
     console.log(maBangLuongCu, maBangLuongMoi, maNhanVien, thang, luongThuong);
     try {
         await luongBongService.updateLuongBong(maBangLuongCu, maBangLuongMoi, maNhanVien, thang, luongThuong, maKhauTru);
+        return res.redirect("/luongbong");
         return res.status(200).json({ message: 'Update Lương Bổng thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -267,6 +281,7 @@ const Handle_LuongBong_Delete = async (req, res) => {
     let maBangLuong = req.params.maBangLuong;
     try {
         await luongBongService.deleteLuongBong(maBangLuong);
+        return res.redirect("/luongbong");
         return res.status(200).json({ message: 'Delete Lương Bổng thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -285,6 +300,7 @@ const Handle_BangKhauTru_Create = async (req, res) => {
     let moTa = req.body.moTa;
     try {
         await bangKhauTruService.createBangKhauTru(maKhauTru, loaiKhauTru, giaTien, moTa);
+        return res.redirect("/bangkhautru");
         return res.status(200).json({ message: 'Create Bảng Khấu Trừ thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -299,6 +315,7 @@ const Handle_BangKhauTru_Update = async (req, res) => {
     console.log(maKhauTruCu, maKhauTruMoi, loaiKhauTru, giaTien, moTa);
     try {
         await bangKhauTruService.updateBangKhauTru(maKhauTruCu, maKhauTruMoi, loaiKhauTru, giaTien, moTa);
+        return res.redirect("/bangkhautru");
         return res.status(200).json({ message: 'Update Bảng Khấu Trừ thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -308,6 +325,7 @@ const Handle_BangKhauTru_Delete = async (req, res) => {
     let maKhauTru = req.params.maKhauTru;
     try {
         await bangKhauTruService.deleteBangKhauTru(maKhauTru);
+        return res.redirect("/bangkhautru");
         return res.status(200).json({ message: 'Delete Bảng Khấu Trừ thành công' });
     } catch (err) {
         return res.status(400).json({ message: err.message });
@@ -328,6 +346,8 @@ module.exports = {
     Handle_NhanVien_Create,
     Handle_NhanVien_Update,
     Handle_NhanVien_Delete,
+
+    Handle_Find_Update,
 
     Handle_HopDong,
     Handle_HopDong_Create,

@@ -27,8 +27,6 @@
             <input class="tk" type="submit" value="Tìm kiếm">
             <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập tên hoặc mã nhân viên">
         </form>
-        <a href="Themnhanvien.ejs">Thêm nhân viên</a>
-
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Thêm nhân viên
@@ -49,19 +47,19 @@
                             <div class="mb-3">
                                 <label for="maNhanVien" class="form-label">Mã nhân viên</label>
                                 <input class="form-control" id="maNhanVien" aria-describedby="emailHelp"
-                                    name="maNhanVien">
+                                    name="maNhanVien" required>
                             </div>
                             <div class="mb-3">
                                 <label for="tenNhanVien" class="form-label">Tên nhân viên</label>
-                                <input type="text" class="form-control" id="tenNhanVien" name="tenNhanVien">
+                                <input type="text" class="form-control" id="tenNhanVien" name="tenNhanVien" required>
                             </div>
                             <div class="mb-3">
                                 <label for="maChucVu" class="form-label">Mã chức vụ</label>
-                                <input type="text" class="form-control" id="maChucVu" name="maChucVu">
+                                <input type="text" class="form-control" id="maChucVu" name="maChucVu" required>
                             </div>
                             <div class="mb-3">
                                 <label for="maPhongBan" class="form-label">Mã phòng ban</label>
-                                <input type="text" class="form-control" id="maPhongBan" name="maPhongBan">
+                                <input type="text" class="form-control" id="maPhongBan" name="maPhongBan" required>
                             </div>
                             <div class="mb-3">
                                 <label for="tuoi" class="form-label">Tuổi</label>
@@ -69,7 +67,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="sdt" class="form-label">Số điện thoại</label>
-                                <input type="tel" class="form-control" id="sdt" name="sdt">
+                                <input type="number" class="form-control" id="sdt" name="sdt">
                             </div>
 
                         </div>
@@ -118,7 +116,10 @@
                                     <%= JSON.stringify(item.sdt)%>
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn btn-warning">Sửa</button>
+                                    <form method="post" style="display: inline;"
+                                        action="/nhanvien/findupdate/<%=item.maNhanVien%>">
+                                        <button type="submit" class="btn btn-warning">Sửa</button>
+                                    </form>
                                     <form method="post" style="display: inline;"
                                         action="/nhanvien/delete/<%=item.maNhanVien%>">
                                         <button type="submit" class="btn btn-danger">Xóa</button>

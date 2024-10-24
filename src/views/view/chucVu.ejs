@@ -25,7 +25,46 @@
             <input class="tk" type="submit" value="Tìm kiếm">
             <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập tên phòng hoặc mã chức vụ">
         </form>
-        <a href="Themthanhtoan.ejs">Thêm chức vụ</a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Thêm chức vụ
+        </button>
+
+        <!-- Modal -->
+        <form method="post" action="/chucvu/create">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm chức vụ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label for="maChucVu" class="form-label">Mã chức vụ</label>
+                                <input class="form-control" id="maChucVu" aria-describedby="emailHelp" name="maChucVu"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tenChucVu" class="form-label">Tên chức vụ</label>
+                                <input type="text" class="form-control" id="tenChucVu" name="tenChucVu" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="luongCoDinh" class="form-label">Lương cố định</label>
+                                <input type="number" class="form-control" id="luongCoDinh" name="luongCoDinh" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <table border="1">
             <thead>
                 <tr>
@@ -52,7 +91,7 @@
                                 <td>
                                     <button type="submit" class="btn btn-warning">Sửa</button>
                                     <form method="post" style="display: inline;"
-                                        action="/nhanvien/delete/<%=item.maNhanVien%>">
+                                        action="/chucvu/delete/<%=item.maChucVu%>">
                                         <button type="submit" class="btn btn-danger">Xóa</button>
                                     </form>
                                 </td>

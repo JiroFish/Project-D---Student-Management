@@ -334,7 +334,7 @@ const Handle_BangKhauTru_Delete = async (req, res) => {
 const Handle_LayChucVuGiaoVien = async (req, res) => {
     let GV = await nhanVienService.getGiaoVien();
     console.log(GV);
-    return res.json(GV);
+    return res.status(200).json(GV);
     // res.json({ message: "Lấy API thành công" });
 }
 

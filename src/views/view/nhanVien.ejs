@@ -23,10 +23,15 @@
     </style>
     <div class="sinhvien">
         <h1>Quản Lý Nhân Viên</h1>
-        <form method="post" action="">
-            <input class="tk" type="submit" value="Tìm kiếm">
-            <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập tên hoặc mã nhân viên">
-        </form>
+        <div>
+            <form method="post" action="/seachnv">
+                <div>
+                    <input id="search" class="Timkiem" type="text" name="search" value=""
+                        placeholder="Nhập tên hoặc mã nhân viên">
+                    <button class="tk" type="submit" value="Tìm kiếm">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Thêm nhân viên
@@ -116,10 +121,9 @@
                                     <%= JSON.stringify(item.sdt)%>
                                 </td>
                                 <td>
-                                    <form method="post" style="display: inline;"
-                                        action="/nhanvien/findupdate/<%=item.maNhanVien%>">
+                                    <!-- <form method="" style="display: inline;" action="">
                                         <button type="submit" class="btn btn-warning">Sửa</button>
-                                    </form>
+                                    </form> -->
                                     <form method="post" style="display: inline;"
                                         action="/nhanvien/delete/<%=item.maNhanVien%>">
                                         <button type="submit" class="btn btn-danger">Xóa</button>

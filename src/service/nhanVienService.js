@@ -9,6 +9,13 @@ import db from '../models/index';
 //     return hash;
 // }
 
+const seachNhanVien = async (nv) => {
+    let seach = await db.NhanVien.findAll({
+        where: { tenNhanVien: nv }
+    })
+    return seach;
+}
+
 const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt) => {
     try {
         await db.NhanVien.create({
@@ -136,4 +143,4 @@ const getGiaoVien = async () => {
     return getGV;
 }
 
-module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien, findByIdNhanVien }
+module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien, findByIdNhanVien, seachNhanVien }

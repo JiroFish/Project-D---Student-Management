@@ -13,6 +13,19 @@ const Handle_User = (req, res) => {
     return res.render("Themnhanvien.ejs");
 }
 
+const Handle_seach = async (req, res) => {
+    let nv = req.body.search;
+    console.log("check nv", nv);
+    try {
+        let listNhanVien = await nhanVienService.seachNhanVien(nv);
+        return res.render("nhanVien.ejs", { listNhanVien });
+
+    } catch (error) {
+
+    }
+
+}
+
 const Handle_Nhan_Vien = async (req, res) => {
     let listNhanVien = await nhanVienService.readNhanVien();
     // return res.render("sign_up.ejs", { listNhanVien });
@@ -379,5 +392,5 @@ module.exports = {
     Handle_BangKhauTru_Update,
     Handle_BangKhauTru_Delete,
 
-    Handle_LayChucVuGiaoVien
+    Handle_LayChucVuGiaoVien, Handle_seach
 }

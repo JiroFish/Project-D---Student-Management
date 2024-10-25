@@ -4,8 +4,8 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('nhanvien', [{
-      maNhanVien: '2',
-      tenNhanVien: 'Nguyễn C',
+      maNhanVien: '4',
+      tenNhanVien: 'Nguyễn F',
       maChucVu: 'GV',
       maPhongBan: 'PB1',
       tuoi: 18,

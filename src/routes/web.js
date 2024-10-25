@@ -12,7 +12,8 @@ const initWebRoutes = (app) => {
     routes.post("/nhanvien/update/:maNhanVienCu", HomeController.Handle_NhanVien_Update);
     routes.post("/nhanvien/delete/:maNhanVien", HomeController.Handle_NhanVien_Delete);
 
-    routes.post("/nhanvien/findupdate/:maNhanVien", HomeController.Handle_Find_Update);
+    // routes.post("/nhanvien/findupdate/:maNhanVien", HomeController.Handle_Find_Update);
+    routes.post("/seachnv", HomeController.Handle_seach);
 
     routes.get("/hopdong", HomeController.Handle_HopDong);
     routes.post("/hopdong/create", HomeController.Handle_HopDong_Create);

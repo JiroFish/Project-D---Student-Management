@@ -1,5 +1,6 @@
 import express from "express";
 import HomeController from "../controller/HomeController";
+import ControllerNghiepVu from "../controller/ControllerNghiepVu";
 const routes = express.Router();
 
 
@@ -11,14 +12,16 @@ const initWebRoutes = (app) => {
     routes.post("/nhanvien/create", HomeController.Handle_NhanVien_Create);
     routes.post("/nhanvien/update/:maNhanVienCu", HomeController.Handle_NhanVien_Update);
     routes.post("/nhanvien/delete/:maNhanVien", HomeController.Handle_NhanVien_Delete);
+    routes.post("/nhanvien/search", HomeController.Handle_seachnv);
+    routes.post("/nhanvien/info", ControllerNghiepVu.Handle_NhanVienInfo);
 
     // routes.post("/nhanvien/findupdate/:maNhanVien", HomeController.Handle_Find_Update);
-    routes.post("/seachnv", HomeController.Handle_seach);
 
     routes.get("/hopdong", HomeController.Handle_HopDong);
     routes.post("/hopdong/create", HomeController.Handle_HopDong_Create);
     routes.post("/hopdong/update/:maHopDongCu", HomeController.Handle_HopDong_Update);
     routes.post("/hopdong/delete/:maHopDong", HomeController.Handle_HopDong_Delete);
+    routes.post("/hopdong/search", HomeController.Handle_seachhd);
 
     routes.get("/chucvu", HomeController.Handle_ChucVu);
     routes.post("/chucvu/create", HomeController.Handle_ChucVu_Create);
@@ -45,7 +48,7 @@ const initWebRoutes = (app) => {
     routes.post("/bangkhautru/update/:maKhauTruCu", HomeController.Handle_BangKhauTru_Update);
     routes.post("/bangkhautru/delete/:maKhauTru", HomeController.Handle_BangKhauTru_Delete);
 
-    routes.get("/chucvugiaovien", HomeController.Handle_LayChucVuGiaoVien);
+    routes.get("/chucvugiaovien", ControllerNghiepVu.Handle_LayChucVuGiaoVien);
 
 
     return app.use("/", routes);

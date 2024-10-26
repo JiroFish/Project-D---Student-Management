@@ -9,7 +9,7 @@ import db from '../models/index';
 //     return hash;
 // }
 
-const seachNhanVien = async (nv) => {
+const searchNhanVien = async (nv) => {
     let seach = await db.NhanVien.findAll({
         where: { tenNhanVien: nv }
     })
@@ -42,13 +42,25 @@ const readNhanVien = async () => {
             //     model: db.HopDong,
             //     attributes: ['maHopDong']
             // },
-            // include: {
-            //     model: db.ChucVu,
-            //     attributes: ['maChucVu']
-            // },
+            include:
+                [
+                    {
+                        model: db.ChucVu,
+                        // where: {
+                        //     maChucVu: "GV"
+                        // },
+                        attributes: ['tenChucVu']
+                    },
+                    {
+                        model: db.PhongBan,
+                        attributes: ['tenPhongBan']
+                    }
+
+                ]
+            ,
             // include: {
             //     model: db.PhongBan,
-            //     attributes: ['maPhongBan']
+            //     attributes: ['tenPhongBan']
             // },
             // include: {
             //     model: db.DonNghiPhep,
@@ -143,4 +155,12 @@ const getGiaoVien = async () => {
     return getGV;
 }
 
-module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien, findByIdNhanVien, seachNhanVien }
+const getInfoNhanVien = async (maNhanVien) => {
+    await db.NhanVien.findAll({
+        where: {
+            maNhanVien: maNhanVien
+        }
+    })
+}
+
+module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien, findByIdNhanVien, searchNhanVien, getInfoNhanVien }

@@ -13,19 +13,16 @@ const Handle_User = (req, res) => {
     return res.render("Themnhanvien.ejs");
 }
 
-const Handle_seach = async (req, res) => {
-    let nv = req.body.search;
+const Handle_seachnv = async (req, res) => {
+    let nv = req.body.searchnv;
     console.log("check nv", nv);
     try {
-        let listNhanVien = await nhanVienService.seachNhanVien(nv);
+        let listNhanVien = await nhanVienService.searchNhanVien(nv);
         return res.render("nhanVien.ejs", { listNhanVien });
-
     } catch (error) {
-
+        console.log("Lỗi thực hiện nhanVienService", error);
     }
-
 }
-
 const Handle_Nhan_Vien = async (req, res) => {
     let listNhanVien = await nhanVienService.readNhanVien();
     // return res.render("sign_up.ejs", { listNhanVien });
@@ -83,11 +80,18 @@ const Handle_NhanVien_Delete = async (req, res) => {
     }
 }
 
+const Handle_seachhd = async () => {
+    let hd = req.body.search;
+    try {
+        let listHopDong = await hopDongService.seachHopDong(hd);
+        return res.render("hopDong.ejs", { listHopDong });
+    } catch (error) {
+        console.log("Lỗi thực hiện nhanVienService", error);
+    }
+}
 const Handle_HopDong = async (req, res) => {
     let listHopDong = await hopDongService.readHopDong();
     return res.render("hopDong.ejs", { listHopDong });
-    //sử dụng listNhanVien để renderView
-
 }
 const Handle_HopDong_Create = async (req, res) => {
     let maHopDong = req.body.maHopDong;
@@ -344,12 +348,7 @@ const Handle_BangKhauTru_Delete = async (req, res) => {
         return res.status(400).json({ message: err.message });
     }
 }
-const Handle_LayChucVuGiaoVien = async (req, res) => {
-    let GV = await nhanVienService.getGiaoVien();
-    console.log(GV);
-    return res.status(200).json(GV);
-    // res.json({ message: "Lấy API thành công" });
-}
+
 
 module.exports = {
     Handle_Home,
@@ -359,6 +358,7 @@ module.exports = {
     Handle_NhanVien_Create,
     Handle_NhanVien_Update,
     Handle_NhanVien_Delete,
+    Handle_seachnv,
 
     Handle_Find_Update,
 
@@ -366,6 +366,7 @@ module.exports = {
     Handle_HopDong_Create,
     Handle_HopDong_Update,
     Handle_HopDong_Delete,
+    Handle_seachhd,
 
     Handle_ChucVu,
     Handle_ChucVu_Create,
@@ -390,7 +391,7 @@ module.exports = {
     Handle_BangKhauTru,
     Handle_BangKhauTru_Create,
     Handle_BangKhauTru_Update,
-    Handle_BangKhauTru_Delete,
+    Handle_BangKhauTru_Delete
 
-    Handle_LayChucVuGiaoVien, Handle_seach
+
 }

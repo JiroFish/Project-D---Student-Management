@@ -1,6 +1,6 @@
 <head>
     <title>Danh sách hồ sơ hợp đồng</title>
-    <link rel="stylesheet" href="css/timkiem.css">
+    <link rel="stylesheet" href="/css/timkiem.css">
     <link rel="icon" type="icon" href="icon/logo.png">
     <%- include('sliderbar.ejs') %>
         <meta charset="UTF-8">
@@ -21,9 +21,9 @@
     </style>
     <div class="sinhvien">
         <h1>Quản Lý Hợp Đồng</h1>
-        <form method="GET" action="">
-            <input class="tk" type="submit" value="Tìm kiếm">
-            <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập mã nhân viên hoặc mã hợp đồng">
+        <form method="post" action="/hopdong/search">
+            <button class="tk" type="submit" value="Tìm kiếm">Tìm kiếm</button>
+            <input class="Timkiem" type="text" name="search" placeholder="Nhập tên nhân viên">
         </form>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -88,7 +88,7 @@
                                     <%= JSON.stringify(item.maHopDong)%>
                                 </td>
                                 <td>
-                                    <%= JSON.stringify(item.maHopDong)%>
+                                    <%= JSON.stringify(item.maNhanVien)%>
                                 </td>
                                 <td>
                                     <%= JSON.stringify(item.ngayBatDau)%>

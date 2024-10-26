@@ -2,7 +2,7 @@
 
 <head>
     <title>Quản lý nhân viên</title>
-    <link rel="stylesheet" href="css/timkiem.css">
+    <link rel="stylesheet" href="/css/timkiem.css">
     <link rel="icon" type="icon" href="icon/logo.png">
     <%- include('sliderbar.ejs') %>
         <meta charset="UTF-8">
@@ -24,15 +24,15 @@
     <div class="sinhvien">
         <h1>Quản Lý Nhân Viên</h1>
         <div>
-            <form method="post" action="/seachnv">
+            <form method="post" action="/nhanvien/search">
                 <div>
-                    <input id="search" class="Timkiem" type="text" name="search" value=""
-                        placeholder="Nhập tên hoặc mã nhân viên">
                     <button class="tk" type="submit" value="Tìm kiếm">Tìm kiếm</button>
+                    <input id="searchnv" class="Timkiem" type="text" name="searchnv" value=""
+                        placeholder="Nhập tên hoặc mã nhân viên">
                 </div>
             </form>
         </div>
-        <!-- Button trigger modal -->
+        <!-- Button trigger modal thêm -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Thêm nhân viên
         </button>
@@ -124,10 +124,80 @@
                                     <!-- <form method="" style="display: inline;" action="">
                                         <button type="submit" class="btn btn-warning">Sửa</button>
                                     </form> -->
-                                    <form method="post" style="display: inline;"
-                                        action="/nhanvien/delete/<%=item.maNhanVien%>">
-                                        <button type="submit" class="btn btn-danger">Xóa</button>
-                                    </form>
+                                    <div class="d-flex align-items-center ">
+                                        <!-- Button trigger modal xem info -->
+                                        <button type="button" style="display: inline;" class="btn btn-primary"
+                                            data-bs-toggle="modal" data-bs-target="#modalinfo<%=item.maNhanVien%>">
+                                            Info
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="text-start">
+                                            <form method="post" action="/nhanvien/info">
+                                                <div class="modal fade" id="modalinfo<%=item.maNhanVien%>" tabindex="-1"
+                                                    aria-labelledby="modalinfo" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Thông tin
+                                                                    Nhân viên <%=item.tenNhanVien%>
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <div class="mb-3"
+                                                                    style="display: flex; justify-content: space-between; width: 100%;">
+                                                                    <span style="flex: 1; text-align: left;">
+                                                                        Mã nhân viên = <%=item.maNhanVien%>
+                                                                    </span>
+                                                                    <span style="flex: 1; text-align: left;">
+                                                                        Tên nhân viên = <%=item.tenNhanVien%>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="mb-3"
+                                                                    style="display: flex; justify-content: space-between; width: 100%;">
+                                                                    <span style="flex: 1; text-align: left;">
+                                                                        Mã chức vụ = <%=item.maChucVu%>
+                                                                    </span>
+                                                                    <span style="flex: 1; text-align: left;">
+                                                                        Tên Chức Vụ = <%=item.ChucVu.tenChucVu%>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="mb-3"
+                                                                    style="display: flex; justify-content: space-between; width: 100%;">
+                                                                    <span style="flex: 1; text-align: left;">
+                                                                        Mã phòng ban = <%=item.maPhongBan%>
+                                                                    </span>
+                                                                    <span style="flex: 1; text-align: left;">
+                                                                        Tên phòng ban = <%=item.maPhongBan%>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="tuoi" class="form-label">Tuổi =
+                                                                        <%=item.tuoi%>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="sdt" class="form-label">Số điện
+                                                                        thoại = <%=item.sdt%>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <form method="post" style="display: inline;" class="ms-2 mt-3"
+                                            action="/nhanvien/delete/<%=item.maNhanVien%>">
+                                            <button type="submit" class="btn btn-danger ">Xóa</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         </div>

@@ -1,5 +1,11 @@
 import db from '../models/index';
 
+const seachHopDong = async (hd) => {
+    let seach = await db.HopDong.findAll({
+        where: { maNhanVien: hd }
+    })
+    return seach;
+}
 
 const createHopDong = async (maHopDong, maNhanVien, ngayBatDau, ngayKetThuc) => {
     try {
@@ -57,4 +63,4 @@ const deleteHopDong = async (id) => {
         throw new Error(err.message);
     }
 }
-module.exports = { createHopDong, readHopDong, updateHopDong, deleteHopDong }
+module.exports = { createHopDong, readHopDong, updateHopDong, deleteHopDong, seachHopDong }

@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 8000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('src/views'));
+app.use(express.static('public'));
 
 
 //KHởi động viewEngine biên dịch code import - require

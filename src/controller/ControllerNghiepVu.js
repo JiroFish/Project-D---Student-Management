@@ -18,8 +18,15 @@ const Handle_NhanVienInfo = async (maNhanVien) => {
     console.log("Nhân Viên info", nhanvien_info);
 }
 
+const Handle_Dropdown = async (req, res) => {
+    let nhanVien = await nhanVienService.getDropdown();
+    console.log("a=", nhanVien);
+    return res.json(nhanVien);
+}
+
 module.exports = {
     Handle_LayChucVuGiaoVien,
-    Handle_NhanVienInfo
+    Handle_NhanVienInfo,
+    Handle_Dropdown
 
 }

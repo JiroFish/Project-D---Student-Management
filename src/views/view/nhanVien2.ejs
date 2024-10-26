@@ -1,5 +1,7 @@
+<html lang="en">
+
 <head>
-    <title>Danh sách phòng ban</title>
+    <title>Quản lý nhân viên</title>
     <link rel="stylesheet" href="/css/timkiem.css">
     <link rel="icon" type="icon" href="icon/logo.png">
     <%- include('sliderbar.ejs') %>
@@ -20,100 +22,83 @@
         }
     </style>
     <div class="sinhvien">
-        <h1>Quản Lý Phòng Ban</h1>
-        <form method="GET" action="">
-            <input class="tk" type="submit" value="Tìm kiếm">
-            <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập tên hoặc mã phòng ban">
-        </form>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Thêm phòng ban
-        </button>
-
-        <!-- Modal -->
-        <form method="post" action="/phongban/create">
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Thêm phòng ban</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="mb-3">
-                                <label for="maPhongBan" class="form-label">Mã phòng ban</label>
-                                <input class="form-control" id="maPhongBan" aria-describedby="emailHelp"
-                                    name="maPhongBan" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="tenPhongBan" class="form-label">Tên phòng ban</label>
-                                <input type="text" class="form-control" id="tenPhongBan" name="tenPhongBan" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="viTri" class="form-label">Vị trí phòng ban</label>
-                                <input type="text" class="form-control" id="viTri" name="viTri" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="truongPhong" class="form-label">Trưởng phòng</label>
-                                <input type="text" class="form-control" id="truongPhong" name="truongPhong" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
+        <h1>Quản Lý Nhân Viên 2</h1>
+        <div>
+            <form method="post" action="/nhanvien/search">
+                <div>
+                    <button class="tk" type="submit" value="Tìm kiếm">Tìm kiếm</button>
+                    <input id="searchnv" class="Timkiem" type="text" name="searchnv" value=""
+                        placeholder="Nhập tên hoặc mã nhân viên">
                 </div>
-            </div>
+            </form>
+        </div>
+
+        <form method="get" action="/themnhanvien">
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Thêm nhân viên
+            </button>
         </form>
-        <table border="1">
-            <thead>
+
+        <table>
+            <thead border="1">
                 <tr>
+                    <th class="col-2">Mã nhân viên</th>
+                    <th class="col-2">Tên nhân viên</th>
+                    <th class="col-2">Mã chức vụ</th>
                     <th class="col-2">Mã phòng ban</th>
-                    <th class="col-3">Tên phòng ban</th>
-                    <th class="col-3">Vị trí</th>
-                    <th class="col-2">Trưởng phòng</th>
+                    <th class="col-1">Tuổi</th>
+                    <th class="col-1">Số điện thoại</th>
                     <th class="col-2">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
                 <div>
-                    <% listPhongBan.forEach(function(item,index){%>
+                    <% listNhanVien.forEach(function(item,index){ %>
                         <div>
                             <tr>
+                                <td>
+                                    <%= JSON.stringify(item.maNhanVien)%>
+                                </td>
+                                <td>
+                                    <%= JSON.stringify(item.tenNhanVien)%>
+                                </td>
+                                <td>
+                                    <%= JSON.stringify(item.maChucVu)%>
+                                </td>
                                 <td>
                                     <%= JSON.stringify(item.maPhongBan)%>
                                 </td>
                                 <td>
-                                    <%= JSON.stringify(item.tenPhongBan)%>
+                                    <%= JSON.stringify(item.tuoi)%>
                                 </td>
                                 <td>
-                                    <%= JSON.stringify(item.viTri)%>
+                                    <%= JSON.stringify(item.sdt)%>
                                 </td>
                                 <td>
-                                    <%= JSON.stringify(item.truongPhong)%>
-                                </td>
-                                <td>
+                                    <!-- <form method="" style="display: inline;" action="">
+                                        <button type="submit" class="btn btn-warning">Sửa</button>
+                                    </form> -->
                                     <div class="d-flex align-items-center ">
                                         <!-- Button trigger modal xem info -->
                                         <button type="button" style="display: inline;" class="btn btn-primary"
-                                            data-bs-toggle="modal" data-bs-target="#modalinfo<%=item.maPhongBan%>">
+                                            data-bs-toggle="modal" data-bs-target="#modalinfo<%=item.maNhanVien%>">
                                             Info
                                         </button>
 
                                         <!-- Modal -->
                                         <div class="text-start">
                                             <form method="post" action="/nhanvien/info">
-                                                <div class="modal fade" id="modalinfo<%=item.maPhongBan%>" tabindex="-1"
+                                                <div class="modal fade" id="modalinfo<%=item.maNhanVien%>" tabindex="-1"
                                                     aria-labelledby="modalinfo" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
 
+
+
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">
-                                                                    Thông tin Phòng ban <%=item.tenPhongBan%>
+                                                                    Thông tin
+                                                                    Nhân viên <%=item.tenNhanVien%>
                                                                 </h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -123,20 +108,39 @@
                                                                 <div class="mb-3"
                                                                     style="display: flex; justify-content: space-between; width: 100%;">
                                                                     <span style="flex: 1; text-align: left;">
-                                                                        Mã phòng ban = <%=item.maPhongBan%>
+                                                                        Mã nhân viên = <%=item.maNhanVien%>
                                                                     </span>
                                                                     <span style="flex: 1; text-align: left;">
-                                                                        Tên phòng ban = <%=item.tenPhongBan%>
+                                                                        Tên nhân viên = <%=item.tenNhanVien%>
                                                                     </span>
                                                                 </div>
                                                                 <div class="mb-3"
                                                                     style="display: flex; justify-content: space-between; width: 100%;">
                                                                     <span style="flex: 1; text-align: left;">
-                                                                        Số lượng nhân viên =
+                                                                        Mã chức vụ = <%=item.maChucVu%>
                                                                     </span>
                                                                     <span style="flex: 1; text-align: left;">
-                                                                        Thành viên:
+                                                                        Tên Chức Vụ = <%=item.ChucVu.tenChucVu%>
                                                                     </span>
+                                                                </div>
+                                                                <div class="mb-3"
+                                                                    style="display: flex; justify-content: space-between; width: 100%;">
+                                                                    <span style="flex: 1; text-align: left;">
+                                                                        Mã phòng ban = <%=item.maPhongBan%>
+                                                                    </span>
+                                                                    <span style="flex: 1; text-align: left;">
+                                                                        Tên phòng ban = <%=item.maPhongBan%>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="tuoi" class="form-label">Tuổi =
+                                                                        <%=item.tuoi%>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="sdt" class="form-label">Số điện
+                                                                        thoại = <%=item.sdt%>
+                                                                    </label>
                                                                 </div>
                                                             </div>
 
@@ -145,9 +149,10 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <form method="post" style="display: inline;"
-                                            action="/phongban/delete/<%=item.maPhongBan%>">
-                                            <button type="submit" class="btn btn-danger">Xóa</button>
+
+                                        <form method="post" style="display: inline;" class="ms-2 mt-3"
+                                            action="/nhanvien/delete/<%=item.maNhanVien%>">
+                                            <button type="submit" class="btn btn-danger ">Xóa</button>
                                         </form>
                                     </div>
                                 </td>
@@ -158,4 +163,5 @@
             </tbody>
         </table>
     </div>
+    <script src="/src/service/nhanVienService.js"></script>
 </body>

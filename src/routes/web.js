@@ -1,6 +1,7 @@
 import express from "express";
 import HomeController from "../controller/HomeController";
 import ControllerNghiepVu from "../controller/ControllerNghiepVu";
+import Controller_ChangePage from "../controller/Controller_ChangePage";
 const routes = express.Router();
 
 
@@ -14,6 +15,7 @@ const initWebRoutes = (app) => {
     routes.post("/nhanvien/delete/:maNhanVien", HomeController.Handle_NhanVien_Delete);
     routes.post("/nhanvien/search", HomeController.Handle_seachnv);
     routes.post("/nhanvien/info", ControllerNghiepVu.Handle_NhanVienInfo);
+    routes.post("/dropdown", ControllerNghiepVu.Handle_Dropdown);
 
     // routes.post("/nhanvien/findupdate/:maNhanVien", HomeController.Handle_Find_Update);
 
@@ -49,6 +51,10 @@ const initWebRoutes = (app) => {
     routes.post("/bangkhautru/delete/:maKhauTru", HomeController.Handle_BangKhauTru_Delete);
 
     routes.get("/chucvugiaovien", ControllerNghiepVu.Handle_LayChucVuGiaoVien);
+
+
+    routes.get("/themnhanvien", Controller_ChangePage.Handle_ThemNhanVien);
+
 
 
     return app.use("/", routes);

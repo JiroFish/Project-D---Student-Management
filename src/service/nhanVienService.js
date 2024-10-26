@@ -16,6 +16,23 @@ const searchNhanVien = async (nv) => {
     return seach;
 }
 
+const getDropdown = async () => {
+    let nhanvien = [];
+    try {
+        nhanvien = await db.NhanVien.findAll({
+            where: {
+                maNhanVien: "admin"
+            },
+            raw: true,
+            nest: true
+        })
+        console.log("drop", nhanvien)
+        return nhanvien;
+    } catch (err) {
+        console.log('>>>>>lỗi', err);
+    }
+}
+
 const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt) => {
     try {
         await db.NhanVien.create({
@@ -163,4 +180,21 @@ const getInfoNhanVien = async (maNhanVien) => {
     })
 }
 
-module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien, findByIdNhanVien, searchNhanVien, getInfoNhanVien }
+const getInfoChucVuPhongBan = async () => {
+    let chucVu = await db.ChucVu.findAll({
+        attributes: ['maChucVu', 'tenChucVu'],
+        raw: true,
+        nest: true
+    })
+    let phongBan = await db.PhongBan.findAll({
+        attributes: ['maPhongBan', 'tenPhongBan'],
+        raw: true,
+        nest: true
+    })
+    let cv_pb = [...chucVu, ...phongBan];
+    console.log("check cv_pb", cv_pb);
+    return cv_pb;
+}
+
+
+module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien, findByIdNhanVien, searchNhanVien, getInfoNhanVien, getDropdown, getInfoChucVuPhongBan }

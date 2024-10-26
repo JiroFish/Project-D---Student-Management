@@ -33,9 +33,11 @@
             </form>
         </div>
         <!-- Button trigger modal thêm -->
+        <!-- <form method="post" action="/dropdown"> -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Thêm nhân viên
         </button>
+        <!-- </form> -->
 
         <!-- Modal -->
         <form method="post" action="/nhanvien/create">
@@ -58,6 +60,34 @@
                                 <label for="tenNhanVien" class="form-label">Tên nhân viên</label>
                                 <input type="text" class="form-control" id="tenNhanVien" name="tenNhanVien" required>
                             </div>
+
+                            <script>
+                                try {
+                                    const a = await fetch('/dropdown') // Thay /path/to/ với đường dẫn trả về JSON của bạn
+                                        .then(response => response.json())
+                                        .then(nhanVien => {
+                                            // Thêm dữ liệu vào dropdown
+                                            nhanVien.forEach(employee => {
+                                                const option = document.createElement("option");
+                                                option.value = employee.maNhanVien;
+                                                option.textContent = employee.tenNhanVien;
+                                                document.getElementById("employeeSelect").appendChild(option);
+                                            });
+                                        })
+                                        .catch(error => console.error("Lỗi khi tải dữ liệu JSON:", error));
+
+                                } catch (error) {
+                                    console.error('Lỗi khi gọi API:', error);
+                                }
+                            </script>
+
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
                             <div class="mb-3">
                                 <label for="maChucVu" class="form-label">Mã chức vụ</label>
                                 <input type="text" class="form-control" id="maChucVu" name="maChucVu" required>
@@ -99,7 +129,7 @@
             </thead>
             <tbody>
                 <div>
-                    <% listNhanVien.forEach(function(item,index){%>
+                    <% listNhanVien.forEach(function(item,index){ %>
                         <div>
                             <tr>
                                 <td>
@@ -139,8 +169,11 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
 
+
+
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Thông tin
+                                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                                    Thông tin
                                                                     Nhân viên <%=item.tenNhanVien%>
                                                                 </h5>
                                                                 <button type="button" class="btn-close"
@@ -206,4 +239,5 @@
             </tbody>
         </table>
     </div>
+    <script src="/src/service/nhanVienService.js"></script>
 </body>

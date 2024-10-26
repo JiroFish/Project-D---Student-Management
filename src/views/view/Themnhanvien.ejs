@@ -6,7 +6,21 @@
     <body>
         <div class="themsinhvien">
             <div>
-                <form action="" method="POST">
+                <form action="/nhanvien/create" method="post">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Chọn Chức vụ</option>
+                        <% info_ChucVu_PhongBan.forEach(function(item,index){ %>
+                            <option>
+                                <%=item.maPhongBan%>
+                            </option>
+                            <!-- <div>
+                            <%=item.maChucVu%>
+                        </div>
+                        <div>
+                            <%=item.maPhongBan%>
+                        </div> -->
+                            <%})%>
+                    </select>
                     <div class="form-group">
                         <label for="Manhanvien">Mã nhân viên</label>
                         <input type="text" name="Manhanvien" id="manhanvien" placeholder="VD: NV1">

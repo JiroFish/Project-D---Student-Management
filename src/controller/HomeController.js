@@ -23,10 +23,11 @@ const Handle_seachnv = async (req, res) => {
         console.log("Lỗi thực hiện nhanVienService", error);
     }
 }
+
 const Handle_Nhan_Vien = async (req, res) => {
     let listNhanVien = await nhanVienService.readNhanVien();
     // return res.render("sign_up.ejs", { listNhanVien });
-    return res.render("nhanVien.ejs", { listNhanVien });
+    return res.render("nhanVien2.ejs", { listNhanVien });
 }
 const Handle_NhanVien_Create = async (req, res) => {
     let maNhanVien = req.body.maNhanVien;

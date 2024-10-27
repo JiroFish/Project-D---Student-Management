@@ -16,10 +16,12 @@ form {
     flex-direction: column;
     width: 500px;
 }
+
 .label input {
     display: inline-block;
     margin-bottom: 10px;
 }
+
 label {
     margin-bottom: 5px;
     font-weight: bold;
@@ -27,13 +29,15 @@ label {
     text-align: left;
 }
 
-input[type="text"], select {
+input[type="text"],
+select {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #cccccc;
     border-radius: 4px;
     font-size: 16px;
-    width: calc(100% - 22px); /* Adjust width to include padding */
+    width: calc(100% - 22px);
+    /* Adjust width to include padding */
 }
 
 input[type="submit"] {

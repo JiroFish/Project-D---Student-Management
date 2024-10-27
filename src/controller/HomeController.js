@@ -30,6 +30,7 @@ const Handle_Nhan_Vien = async (req, res) => {
     return res.render("nhanVien2.ejs", { listNhanVien });
 }
 const Handle_NhanVien_Create = async (req, res) => {
+    let info_ChucVu_PhongBan = await nhanVienService.getInfoChucVuPhongBan();
     let maNhanVien = req.body.maNhanVien;
     let tenNhanVien = req.body.tenNhanVien;
     let maChucVu = req.body.maChucVu;
@@ -39,12 +40,17 @@ const Handle_NhanVien_Create = async (req, res) => {
     let maBangLuong = req.body.maBangLuong;
     try {
         await nhanVienService.createUser(maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt, maBangLuong);
+        let messageThanhCong = 'Thêm Thành Công';
+        info_ChucVu_PhongBan['thanhCong'] = [messageThanhCong];
+        return res.render("Themnhanvien.ejs", { info_ChucVu_PhongBan });
         return res.redirect("/nhanvien");
         // return res.status(200).json({ message: 'Create Nhân viên thành công' });
     } catch (err) {
-        return res.status(400).json({ message: err.message });
+        info_ChucVu_PhongBan['Message'] = err.message;
+        console.log(err);
+        return res.render("Themnhanvien.ejs", { info_ChucVu_PhongBan });
     }
-    // return res.redirect("/nhanvien");
+
 }
 
 const Handle_Find_Update = async (req, res) => {

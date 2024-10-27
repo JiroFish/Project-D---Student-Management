@@ -33,8 +33,25 @@ const getDropdown = async () => {
     }
 }
 
+const checkDuplicate = async (maNhanVien) => {
+    try {
+        let checker = await db.NhanVien.findAll({
+            where: {
+                maNhanVien: maNhanVien
+            }
+        });
+        if (checker) {
+            throw new Error("TB trong servive Đã có bản ghi trùng mã nhân viên");
+        }
+    } catch (error) {
+        console.log("Lỗi hàm checkDuplicate");
+        return;
+    }
+};
+
 const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, sdt) => {
     try {
+        await checkDuplicate(maNhanVien);
         await db.NhanVien.create({
             maNhanVien: maNhanVien,
             tenNhanVien: tenNhanVien,
@@ -43,8 +60,9 @@ const createUser = async (maNhanVien, tenNhanVien, maChucVu, maPhongBan, tuoi, s
             tuoi: tuoi,
             sdt: sdt
         })
+
     } catch (err) {
-        console.log(err);
+        throw new Error("Trùng mã nhân viên");
     }
 }
 
@@ -191,7 +209,8 @@ const getInfoChucVuPhongBan = async () => {
         raw: true,
         nest: true
     })
-    let cv_pb = [...chucVu, ...phongBan];
+    let checkerNull = [{ errorMessage: null, thanhCong: null }]
+    let cv_pb = [...chucVu, ...phongBan, ...checkerNull];
     console.log("check cv_pb", cv_pb);
     return cv_pb;
 }

@@ -1,5 +1,8 @@
+<html lang="en">
+
 <head>
-    <title>Danh sách hồ sơ hợp đồng</title>
+    <title>Phòng Ban
+    </title>
     <link rel="stylesheet" href="/css/timkiem.css">
     <link rel="icon" type="icon" href="icon/logo.png">
     <%- include('sliderbar.ejs') %>
@@ -20,51 +23,47 @@
         }
     </style>
     <div class="sinhvien">
-        <h1>Quản Lý Hợp Đồng</h1>
-        <form method="post" action="/hopdong/search">
-            <button class="tk" type="submit" value="Tìm kiếm">Tìm kiếm</button>
-            <input class="Timkiem" type="text" name="search" placeholder="Nhập tên nhân viên">
-        </form>
+        <h1>Nhân Sự Phòng Ban
+        </h1>
 
-        <form method="get" action="/themhopdong">
-            <button type="submit" class="btn btn-primary">
-                Thêm Hợp Đồng
-            </button>
-        </form>
-
-        <table border="1">
-            <thead>
+        <table>
+            <thead border="1">
                 <tr>
-                    <th>Mã hợp đồng</th>
-                    <th>Mã nhân viên</th>
-                    <th>Ngày bắt đầu</th>
-                    <th>Ngày kết thúc</th>
-                    <th>Thao tác</th>
+                    <th class="col-2">Mã nhân viên</th>
+                    <th class="col-2">Tên nhân viên</th>
+                    <th class="col-2">Mã chức vụ</th>
+                    <th class="col-1">Tuổi</th>
+                    <th class="col-1">Số điện thoại</th>
+                    <th class="col-2">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
                 <div>
-                    <% listHopDong.forEach(function(item,index){%>
+                    <% chiTietPhongBan.forEach(function(item,index){ %>
                         <div>
                             <tr>
-                                <td>
-                                    <%= JSON.stringify(item.maHopDong)%>
-                                </td>
                                 <td>
                                     <%= JSON.stringify(item.maNhanVien)%>
                                 </td>
                                 <td>
-                                    <%= JSON.stringify(item.ngayBatDau)%>
+                                    <%= JSON.stringify(item.tenNhanVien)%>
                                 </td>
                                 <td>
-                                    <%= JSON.stringify(item.ngayKetThuc)%>
+                                    <%= JSON.stringify(item.maChucVu)%>
                                 </td>
                                 <td>
-                                    <!-- <button type="submit" class="btn btn-warning">Sửa</button> -->
-                                    <form method="post" style="display: inline;"
-                                        action="/hopdong/delete/<%=item.maHopDong%>">
-                                        <button type="submit" class="btn btn-danger">Xóa</button>
-                                    </form>
+                                    <%= JSON.stringify(item.tuoi)%>
+                                </td>
+                                <td>
+                                    <%= JSON.stringify(item.sdt)%>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center ">
+                                        <form method="post" style="display: inline;" class="ms-2 mt-3"
+                                            action="/nhanvien/delete/<%=item.maNhanVien%>">
+                                            <button type="submit" class="btn btn-danger ">Xóa</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         </div>
@@ -73,4 +72,5 @@
             </tbody>
         </table>
     </div>
+    <script src="/src/service/nhanVienService.js"></script>
 </body>

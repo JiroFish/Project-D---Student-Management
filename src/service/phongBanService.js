@@ -52,6 +52,13 @@ const deletePhongBan = async (id) => {
     if (deletedRows === 0) {
         throw new Error('PhongBan Không tìm thấy bản ghi nào để xóa');
     }
-
 }
-module.exports = { createPhongBan, readPhongBan, updatePhongBan, deletePhongBan }
+
+const getNhanSuPB = async (maPhongBan) => {
+    let getNhanSu = await db.NhanVien.findAll({
+        where: { maPhongBan: maPhongBan },
+        raw: true
+    })
+    return getNhanSu;
+}
+module.exports = { createPhongBan, readPhongBan, updatePhongBan, deletePhongBan, getNhanSuPB }

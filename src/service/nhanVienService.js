@@ -15,6 +15,16 @@ const searchNhanVien = async (nv) => {
     })
     return seach;
 }
+const searchNhanVienPB = async (nv, pb) => {
+    let seach = await db.NhanVien.findAll({
+        where: {
+            tenNhanVien: nv,
+            maPhongBan: pb
+        },
+        raw: true
+    })
+    return seach;
+}
 
 const getDropdown = async () => {
     let nhanvien = [];
@@ -190,12 +200,13 @@ const getGiaoVien = async () => {
     return getGV;
 }
 
-const getInfoNhanVien = async (maNhanVien) => {
-    await db.NhanVien.findAll({
-        where: {
-            maNhanVien: maNhanVien
-        }
+const getInfoNhanVien = async () => {
+    let select_NhanVien_in_HopDong = await db.NhanVien.findAll({
+        attributes: ['maNhanVien', 'tenNhanVien'],
+        raw: true,
+        nest: true
     })
+    return select_NhanVien_in_HopDong
 }
 
 const getInfoChucVuPhongBan = async () => {
@@ -215,5 +226,26 @@ const getInfoChucVuPhongBan = async () => {
     return cv_pb;
 }
 
+const nhanVienService = async () => {
+    let nhanVien = await db.NhanVien.findAll({
+        attributes: ['maNhanVien', 'tenNhanVien'],
+        raw: true,
+        nest: true
+    })
+    return nhanVien;
+}
 
-module.exports = { createUser, readNhanVien, deleteUser, updateUser, getGiaoVien, findByIdNhanVien, searchNhanVien, getInfoNhanVien, getDropdown, getInfoChucVuPhongBan }
+module.exports = {
+    createUser,
+    readNhanVien,
+    deleteUser,
+    updateUser,
+    getGiaoVien,
+    findByIdNhanVien,
+    searchNhanVien,
+    getInfoNhanVien,
+    getDropdown,
+    getInfoChucVuPhongBan,
+    searchNhanVienPB,
+    nhanVienService
+}

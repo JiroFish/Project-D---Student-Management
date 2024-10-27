@@ -14,7 +14,7 @@ const Handle_LayChucVuGiaoVien = async (req, res) => {
 }
 
 const Handle_NhanVienInfo = async (maNhanVien) => {
-    let nhanvien_info = await db.nhanVienService.getInfoNhanVien(maNhanVien);
+    let nhanvien_info = await nhanVienService.getInfoNhanVien(maNhanVien);
     console.log("Nhân Viên info", nhanvien_info);
 }
 

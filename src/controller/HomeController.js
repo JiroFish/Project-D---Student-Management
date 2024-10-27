@@ -18,7 +18,18 @@ const Handle_seachnv = async (req, res) => {
     console.log("check nv", nv);
     try {
         let listNhanVien = await nhanVienService.searchNhanVien(nv);
-        return res.render("nhanVien.ejs", { listNhanVien });
+        return res.render("nhanVien2.ejs", { listNhanVien });
+    } catch (error) {
+        console.log("Lỗi thực hiện nhanVienService", error);
+    }
+}
+const Handle_seachnvpb = async (req, res) => {
+
+    let nv = req.body.searchnv;
+    console.log("check nv", nv);
+    try {
+        let listNhanVien = await nhanVienService.searchNhanVienPB(nv);
+        return res.render("chiTietPhongBan.ejs", { listNhanVien });
     } catch (error) {
         console.log("Lỗi thực hiện nhanVienService", error);
     }
@@ -101,15 +112,20 @@ const Handle_HopDong = async (req, res) => {
     return res.render("hopDong.ejs", { listHopDong });
 }
 const Handle_HopDong_Create = async (req, res) => {
+    let infoNhanVien = await nhanVienService.getInfoNhanVien();
     let maHopDong = req.body.maHopDong;
     let maNhanVien = req.body.maNhanVien;
     let ngayBatDau = req.body.ngayBatDau;
     let ngayKetThuc = req.body.ngayKetThuc;
     try {
         await hopDongService.createHopDong(maHopDong, maNhanVien, ngayBatDau, ngayKetThuc);
-        return res.redirect("/hopdong");
+        let messageThanhCong = 'Thêm Thành Công';
+        infoNhanVien['thanhCong'] = [messageThanhCong];
+        return res.render("Themhopdong", { infoNhanVien })
         return res.status(200).json({ message: 'Create hợp đồng thành công' });
     } catch (err) {
+        infoNhanVien['Message'] = err.message;
+        return res.render("Themhopdong.ejs", { infoNhanVien });
         return res.status(400).json({ message: err.message });
     }
 }
@@ -357,6 +373,19 @@ const Handle_BangKhauTru_Delete = async (req, res) => {
 }
 
 
+const Handle_ChiTietPhongBan = async (req, res) => {
+    try {
+        let maPhongBan = req.params.maPhongBan;
+        console.log("check_cotrl", maPhongBan);
+        let chiTietPhongBan = await phongBanService.getNhanSuPB(maPhongBan);
+        return res.render("chiTietPhongBan.ejs", { chiTietPhongBan });
+        // return res.render("chiTietPhongBan.ejs");
+        return null;
+    } catch (error) {
+
+    }
+}
+
 module.exports = {
     Handle_Home,
     Handle_User,
@@ -398,7 +427,8 @@ module.exports = {
     Handle_BangKhauTru,
     Handle_BangKhauTru_Create,
     Handle_BangKhauTru_Update,
-    Handle_BangKhauTru_Delete
+    Handle_BangKhauTru_Delete,
 
-
+    Handle_ChiTietPhongBan,
+    Handle_seachnvpb
 }

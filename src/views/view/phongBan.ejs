@@ -23,7 +23,7 @@
         <h1>Quản Lý Phòng Ban</h1>
         <form method="GET" action="">
             <input class="tk" type="submit" value="Tìm kiếm">
-            <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập tên hoặc mã phòng ban">
+            <input class="Timkiem" type="text" name="search" value="" placeholder="Nhập tên phòng ban">
         </form>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -122,21 +122,20 @@
                                                             <div class="modal-body">
                                                                 <div class="mb-3"
                                                                     style="display: flex; justify-content: space-between; width: 100%;">
-                                                                    <span style="flex: 1; text-align: left;">
+                                                                    <span style="flex: 1; text-align: center;">
                                                                         Mã phòng ban = <%=item.maPhongBan%>
                                                                     </span>
-                                                                    <span style="flex: 1; text-align: left;">
+                                                                    <span style="flex: 1; text-align: center;">
                                                                         Tên phòng ban = <%=item.tenPhongBan%>
                                                                     </span>
                                                                 </div>
-                                                                <div class="mb-3"
+
+                                                                <div class="mb-3 d-flex justify-content-center"
                                                                     style="display: flex; justify-content: space-between; width: 100%;">
-                                                                    <span style="flex: 1; text-align: left;">
-                                                                        Số lượng nhân viên =
-                                                                    </span>
-                                                                    <span style="flex: 1; text-align: left;">
-                                                                        Thành viên:
-                                                                    </span>
+
+                                                                    <!-- <span style="flex: 1; text-align: left;">
+                                                                        Số lượng nhân viên = 
+                                                                    </span> -->
                                                                 </div>
                                                             </div>
 
@@ -145,7 +144,11 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <form method="post" style="display: inline;"
+                                        <form method="get" action="/chitietphongban/<%=item.maPhongBan%>">
+                                            <button type="submit" class="btn btn-primary mt-3 ms-2">Nhân sự
+                                            </button>
+                                        </form>
+                                        <form method="post" style="display: inline;" class=" mt-3 ms-2"
                                             action="/phongban/delete/<%=item.maPhongBan%>">
                                             <button type="submit" class="btn btn-danger">Xóa</button>
                                         </form>

@@ -7,8 +7,25 @@ const seachHopDong = async (hd) => {
     return seach;
 }
 
+const checkDuplicate = async (maHopDong) => {
+    try {
+        let checker = await db.HopDong.findAll({
+            where: {
+                maHopDong: maHopDong
+            }
+        });
+        if (checker) {
+            throw new Error("TB trong servive Đã có bản ghi trùng mã hợp đồng");
+        }
+    } catch (error) {
+        console.log("Lỗi hàm checkDuplicate");
+        return;
+    }
+};
+
 const createHopDong = async (maHopDong, maNhanVien, ngayBatDau, ngayKetThuc) => {
     try {
+        await checkDuplicate(maHopDong);
         await db.HopDong.create({
             maHopDong: maHopDong,
             maNhanVien: maNhanVien,
@@ -16,6 +33,7 @@ const createHopDong = async (maHopDong, maNhanVien, ngayBatDau, ngayKetThuc) => 
             ngayKetThuc: ngayKetThuc
         })
     } catch (err) {
+        throw new Error("Trùng mã Hợp Đồng");
         console.log(err);
     }
 }
@@ -63,4 +81,4 @@ const deleteHopDong = async (id) => {
         throw new Error(err.message);
     }
 }
-module.exports = { createHopDong, readHopDong, updateHopDong, deleteHopDong, seachHopDong }
+module.exports = { createHopDong, readHopDong, updateHopDong, deleteHopDong, seachHopDong, checkDuplicate }

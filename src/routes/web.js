@@ -29,6 +29,7 @@ const initWebRoutes = (app) => {
     routes.post("/chucvu/create", HomeController.Handle_ChucVu_Create);
     routes.post("/chucvu/update/:maChucVuCu", HomeController.Handle_ChucVu_Update);
     routes.post("/chucvu/delete/:maChucVu", HomeController.Handle_ChucVu_Delete);
+    routes.post("/chucvu/search", HomeController.Handle_searchcv);
 
     routes.get("/phongban", HomeController.Handle_PhongBan);
     routes.post("/phongban/create", HomeController.Handle_PhongBan_Create);
@@ -37,6 +38,8 @@ const initWebRoutes = (app) => {
     routes.get("/chitietphongban/:maPhongBan", HomeController.Handle_ChiTietPhongBan);
     routes.get("/chitietphongban", HomeController.Handle_ChiTietPhongBan);
     routes.post("/nhanvienphongban/search", HomeController.Handle_seachnvpb);
+    routes.post("/phongban/search", HomeController.Handle_seachnvpb);
+
 
     routes.get("/donnghiphep", HomeController.Handle_DonNghiPhep);
     routes.post("/donnghiphep/create", HomeController.Handle_DonNghiPhep_Create);

@@ -1,6 +1,8 @@
 import db from '../models/index';
 
 
+
+
 const createChucVu = async (maChucVu, tenChucVu, luongCoDinh) => {
     try {
         await db.ChucVu.create({
@@ -13,6 +15,21 @@ const createChucVu = async (maChucVu, tenChucVu, luongCoDinh) => {
     }
 }
 
+const seachChucVu = async (cv) => {
+    let ChucVu = [];
+    try {
+        ChucVu = await db.ChucVu.findAll({
+            where: {
+                tenChucVu: cv
+            },
+            raw: true,
+        })
+        console.log(ChucVu)
+        return ChucVu;
+    } catch (err) {
+        console.log('>>>>>lỗi', err);
+    }
+}
 const readChucVu = async () => {
     let ChucVu = [];
     try {
@@ -53,4 +70,4 @@ const deleteChucVu = async (id) => {
     } catch (err) {
     }
 }
-module.exports = { createChucVu, readChucVu, updateChucVu, deleteChucVu }
+module.exports = { createChucVu, readChucVu, updateChucVu, deleteChucVu, seachChucVu }

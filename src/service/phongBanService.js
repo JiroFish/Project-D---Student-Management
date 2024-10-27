@@ -1,5 +1,18 @@
 import db from '../models/index';
 
+const searchPhongBan = async (pb) => {
+    let search = [];
+    try {
+        search = await db.PhongBan.findAll({
+            where: { tenPhongBan: pb },
+            raw: true
+        })
+        return search;
+
+    } catch (error) {
+
+    }
+}
 
 const createPhongBan = async (maPhongBan, tenPhongBan, viTri, truongPhong) => {
     try {
@@ -61,4 +74,4 @@ const getNhanSuPB = async (maPhongBan) => {
     })
     return getNhanSu;
 }
-module.exports = { createPhongBan, readPhongBan, updatePhongBan, deletePhongBan, getNhanSuPB }
+module.exports = { createPhongBan, readPhongBan, updatePhongBan, deletePhongBan, getNhanSuPB, searchPhongBan }

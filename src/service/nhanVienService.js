@@ -10,10 +10,32 @@ import db from '../models/index';
 // }
 
 const searchNhanVien = async (nv) => {
-    let seach = await db.NhanVien.findAll({
-        where: { tenNhanVien: nv }
-    })
-    return seach;
+    let nhanvien = [];
+    try {
+        nhanvien = await db.NhanVien.findAll({
+            where: {
+                tenNhanVien: nv
+            },
+            include:
+                [
+                    {
+                        model: db.ChucVu,
+                        attributes: ['tenChucVu']
+                    },
+                    {
+                        model: db.PhongBan,
+                        attributes: ['tenPhongBan']
+                    }
+
+                ],
+            raw: true,
+            nest: true
+        })
+        console.log(nhanvien)
+        return nhanvien;
+    } catch (err) {
+        console.log('>>>>>lỗi', err);
+    }
 }
 const searchNhanVienPB = async (nv, pb) => {
     let seach = await db.NhanVien.findAll({

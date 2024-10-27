@@ -1,10 +1,17 @@
 import db from '../models/index';
 
 const seachHopDong = async (hd) => {
-    let seach = await db.HopDong.findAll({
-        where: { maNhanVien: hd }
-    })
-    return seach;
+    let search = [];
+    try {
+        search = await db.HopDong.findAll({
+            where: { maNhanVien: hd },
+            raw: true
+        })
+        return search;
+
+    } catch (error) {
+
+    }
 }
 
 const checkDuplicate = async (maHopDong) => {

@@ -25,11 +25,11 @@ const Handle_seachnv = async (req, res) => {
 }
 const Handle_seachnvpb = async (req, res) => {
 
-    let nv = req.body.searchnv;
-    console.log("check nv", nv);
+    let pb = req.body.searchpb;
+    console.log("check nv", pb);
     try {
-        let listNhanVien = await nhanVienService.searchNhanVienPB(nv);
-        return res.render("chiTietPhongBan.ejs", { listNhanVien });
+        let listPhongBan = await phongBanService.searchPhongBan(pb);
+        return res.render("phongBan.ejs", { listPhongBan });
     } catch (error) {
         console.log("Lỗi thực hiện nhanVienService", error);
     }
@@ -98,8 +98,8 @@ const Handle_NhanVien_Delete = async (req, res) => {
     }
 }
 
-const Handle_seachhd = async () => {
-    let hd = req.body.search;
+const Handle_seachhd = async (req, res) => {
+    let hd = req.body.searchhd;
     try {
         let listHopDong = await hopDongService.seachHopDong(hd);
         return res.render("hopDong.ejs", { listHopDong });
@@ -107,6 +107,7 @@ const Handle_seachhd = async () => {
         console.log("Lỗi thực hiện nhanVienService", error);
     }
 }
+
 const Handle_HopDong = async (req, res) => {
     let listHopDong = await hopDongService.readHopDong();
     return res.render("hopDong.ejs", { listHopDong });
@@ -154,6 +155,16 @@ const Handle_HopDong_Delete = async (req, res) => {
     }
 }
 
+
+const Handle_searchcv = async (req, res) => {
+    let cv = req.body.searchcv;
+    try {
+        let listChucVu = await chucVuService.seachChucVu(cv);
+        return res.render("chucVu.ejs", { listChucVu });
+    } catch (error) {
+        console.log("Lỗi thực hiện nhanVienService", error);
+    }
+}
 const Handle_ChucVu = async (req, res) => {
     let listChucVu = await chucVuService.readChucVu();
     return res.render("chucVu.ejs", { listChucVu });
@@ -430,5 +441,6 @@ module.exports = {
     Handle_BangKhauTru_Delete,
 
     Handle_ChiTietPhongBan,
-    Handle_seachnvpb
+    Handle_seachnvpb,
+    Handle_searchcv
 }
